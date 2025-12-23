@@ -10,6 +10,7 @@ const products = [
     description: "Premium ventilated base with 100% real human hair for natural look.",
     price: "₹8,000",
     rating: 4.9,
+    features: ["100% Real Human Hair", "Ventilated Base", "Natural Look"],
     videoId: "lsicg8",
   },
   {
@@ -19,6 +20,7 @@ const products = [
     description: "Ultra-light 0.03mm 4D French lace with Grade-7A smooth human hair.",
     price: "₹15,000",
     rating: 5.0,
+    features: ["0.03mm Ultra-Light", "4D French Lace", "Grade-7A Hair"],
     videoId: "02ptq8",
   },
   {
@@ -28,6 +30,7 @@ const products = [
     description: "Premium ultra-natural hair system with 0.09mm 5D tissued base.",
     price: "₹20,000",
     rating: 4.7,
+    features: ["0.09mm Tissued Base", "5D Technology", "Ultra-Natural"],
     videoId: "otb2i3",
   },
   {
@@ -37,6 +40,7 @@ const products = [
     description: "Advanced optical base with Grade-5A matte human hair.",
     price: "₹8,000",
     rating: 4.8,
+    features: ["Optical Base", "Grade-5A Hair", "Matte Finish"],
     videoId: "jwf8r7",
   },
   {
@@ -46,6 +50,7 @@ const products = [
     description: "Ultra-thin 4D French lace with flexible PU coating for durability.",
     price: "₹8,000",
     rating: 4.8,
+    features: ["4D French Lace", "PU Coating", "Flexible Design"],
     videoId: "hksrll",
   },
   {
@@ -55,6 +60,7 @@ const products = [
     description: "Advanced hybrid system with 80% French lace and 20% PU for ultimate durability.",
     price: "₹25,000",
     rating: 5.0,
+    features: ["80% French Lace", "20% PU Base", "Ultimate Durability"],
     videoId: "ik6x7g",
   },
   {
@@ -64,65 +70,103 @@ const products = [
     description: "Advanced 0.06mm 7D tissued base with Grade-10A pristine human hair.",
     price: "₹20,000",
     rating: 4.9,
+    features: ["0.06mm Base", "7D Tissued", "Grade-10A Hair"],
     videoId: "emo4z1",
   },
 ];
 
 const ProductsSection = () => {
   return (
-    <section id="products" className="py-16">
+    <section id="products" className="py-24 bg-gradient-dark">
       <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <span className="text-primary uppercase tracking-widest text-sm font-medium">
+            Our Collection
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
+            Premium <span className="text-gradient-gold italic">Hair Systems</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Choose from our range of premium hair systems, crafted for every lifestyle and preference.
+          </p>
+        </motion.div>
+
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="group relative bg-card rounded-xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-300"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group relative bg-card rounded-2xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-500"
             >
               {/* Category Badge */}
-              <div className="absolute top-3 left-3 z-10">
-                <span className="bg-primary/90 text-primary-foreground text-xs font-medium px-2.5 py-1 rounded-full">
+              <div className="absolute top-4 left-4 z-10">
+                <span className="bg-primary/90 text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
                   {product.category}
                 </span>
               </div>
 
               {/* Video Container */}
-              <div className="relative aspect-square overflow-hidden bg-secondary/20">
+              <div className="relative aspect-square overflow-hidden bg-charcoal">
                 <iframe
                   src={`https://streamable.com/e/${product.videoId}?autoplay=1&muted=1&loop=1&controls=0&nocontrols=1`}
                   frameBorder="0"
                   allowFullScreen
                   allow="autoplay"
                   className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                  style={{ 
+                    width: '100%', 
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
                   title={`${product.name} video`}
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 pointer-events-none" />
               </div>
 
               {/* Product Info */}
-              <div className="p-4">
+              <div className="p-5">
                 {/* Rating */}
-                <div className="flex items-center gap-1 mb-1.5">
-                  <Star className="w-3.5 h-3.5 text-primary fill-primary" />
-                  <span className="text-xs font-medium text-foreground">{product.rating}</span>
+                <div className="flex items-center gap-1 mb-2">
+                  <Star className="w-4 h-4 text-primary fill-primary" />
+                  <span className="text-sm font-medium text-foreground">{product.rating}</span>
                 </div>
 
-                <h3 className="font-display text-lg font-bold mb-1 group-hover:text-primary transition-colors">
+                <h3 className="font-display text-xl font-bold mb-2 group-hover:text-primary transition-colors">
                   {product.name}
                 </h3>
-                <p className="text-muted-foreground text-xs leading-relaxed mb-4 line-clamp-2">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
                   {product.description}
                 </p>
 
+                {/* Features */}
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {product.features.map((feature, i) => (
+                    <span
+                      key={i}
+                      className="text-xs bg-secondary/50 text-muted-foreground px-2 py-1 rounded-full"
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+
                 {/* Price and CTA */}
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-xl font-bold text-gradient-purple">
+                <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                  <span className="font-display text-2xl font-bold text-gradient-gold">
                     {product.price}
                   </span>
-                  <Button variant="goldOutline" size="sm" className="text-xs">
+                  <Button variant="goldOutline" size="sm">
                     Enquire
                   </Button>
                 </div>
@@ -130,6 +174,19 @@ const ProductsSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* View All Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-center mt-12"
+        >
+          <Button variant="gold" size="xl">
+            View All Products
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

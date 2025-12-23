@@ -31,18 +31,18 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="font-display text-2xl font-bold text-gradient-gold">
-                CROWN
-              </span>
-              <span className="font-display text-2xl font-light text-foreground">
-                Hair Systems
-              </span>
-            </div>
-            <p className="text-muted-foreground leading-relaxed mb-6 max-w-sm">
-              India's premier destination for luxury hair systems. Helping men
-              rediscover their confidence with premium, undetectable hair solutions.
-            </p>
+          <div className="flex items-center gap-1 mb-6">
+            <span className="font-display text-2xl font-bold text-gradient-gold">
+              SPY
+            </span>
+            <span className="font-display text-2xl font-light text-foreground">
+              HAIR
+            </span>
+          </div>
+          <p className="text-muted-foreground leading-relaxed mb-6 max-w-sm">
+            India's premier destination for luxury hair systems. Helping men
+            rediscover their confidence with premium, undetectable hair solutions.
+          </p>
 
             {/* Social Links */}
             <div className="flex gap-4">
@@ -123,7 +123,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-sm">
-            © {currentYear} Crown Hair Systems. All rights reserved.
+            © {currentYear} SPYHAIR. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <a href="#" className="hover:text-primary transition-colors">

@@ -16,28 +16,28 @@ const testimonials = [
     name: "Amit Sharma",
     location: "Delhi",
     rating: 5,
-    text: "Best investment I've ever made. The quality is outstanding and the customer service is top-notch. Highly recommend SpyHair!",
+    text: "Best investment I've ever made. The quality is outstanding and the customer service is top-notch. Highly recommend 3S Golden Hair!",
   },
   {
     id: 3,
     name: "Vikram Patel",
     location: "Bangalore",
     rating: 5,
-    text: "I was skeptical at first, but SpyHair exceeded all my expectations. Comfortable, natural-looking, and easy to maintain.",
+    text: "I was skeptical at first, but 3S Golden Hair exceeded all my expectations. Comfortable, natural-looking, and easy to maintain.",
   },
   {
     id: 4,
     name: "Arjun Mehta",
     location: "Pune",
     rating: 5,
-    text: "The transformation is amazing! I look 10 years younger. The team at SpyHair is professional and caring.",
+    text: "The transformation is amazing! I look 10 years younger. The team at 3S Golden Hair is professional and caring.",
   },
   {
     id: 5,
     name: "Karan Singh",
     location: "Hyderabad",
     rating: 5,
-    text: "Undetectable and comfortable. I can swim, exercise, and live my life without any worries. Thank you SpyHair!",
+    text: "Undetectable and comfortable. I can swim, exercise, and live my life without any worries. Thank you 3S Golden Hair!",
   },
   {
     id: 6,
@@ -85,7 +85,7 @@ const TestimonialsSection = () => {
             What Our <span className="text-gradient-gold italic">Customers Say</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Join thousands of satisfied customers who have transformed their lives with SpyHair
+            Join thousands of satisfied customers who have transformed their lives with 3S Golden Hair
           </p>
         </motion.div>
 

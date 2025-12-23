@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const products = [
@@ -11,6 +11,7 @@ const products = [
     price: "₹8,000",
     rating: 4.9,
     features: ["100% Real Human Hair", "Ventilated Base", "Natural Look"],
+    videoId: "lsicg8",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const products = [
     price: "₹15,000",
     rating: 5.0,
     features: ["0.03mm Ultra-Light", "4D French Lace", "Grade-7A Hair"],
+    videoId: "02ptq8",
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ const products = [
     price: "₹20,000",
     rating: 4.7,
     features: ["0.09mm Tissued Base", "5D Technology", "Ultra-Natural"],
+    videoId: "otb2i3",
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ const products = [
     price: "₹8,000",
     rating: 4.8,
     features: ["Optical Base", "Grade-5A Hair", "Matte Finish"],
+    videoId: "jwf8r7",
   },
   {
     id: 5,
@@ -47,6 +51,7 @@ const products = [
     price: "₹8,000",
     rating: 4.8,
     features: ["4D French Lace", "PU Coating", "Flexible Design"],
+    videoId: "hksrll",
   },
   {
     id: 6,
@@ -56,6 +61,7 @@ const products = [
     price: "₹25,000",
     rating: 5.0,
     features: ["80% French Lace", "20% PU Base", "Ultimate Durability"],
+    videoId: "ik6x7g",
   },
   {
     id: 7,
@@ -65,6 +71,7 @@ const products = [
     price: "₹20,000",
     rating: 4.9,
     features: ["0.06mm Base", "7D Tissued", "Grade-10A Hair"],
+    videoId: "emo4z1",
   },
 ];
 
@@ -109,17 +116,22 @@ const ProductsSection = () => {
                 </span>
               </div>
 
-              {/* Product Placeholder */}
-              <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-secondary to-muted flex items-center justify-center">
-                <div className="text-center p-6">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-                    <span className="font-display text-2xl font-bold text-primary">
-                      {product.name.charAt(0)}
-                    </span>
-                  </div>
-                  <span className="text-muted-foreground text-sm">Premium Hair System</span>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
+              {/* Video Container */}
+              <div className="relative aspect-square overflow-hidden bg-charcoal">
+                <iframe
+                  src={`https://streamable.com/e/${product.videoId}?autoplay=1&muted=1&loop=1&controls=0&nocontrols=1`}
+                  frameBorder="0"
+                  allowFullScreen
+                  allow="autoplay"
+                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                  style={{ 
+                    width: '100%', 
+                    height: '100%',
+                    objectFit: 'cover',
+                  }}
+                  title={`${product.name} video`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 pointer-events-none" />
               </div>
 
               {/* Product Info */}

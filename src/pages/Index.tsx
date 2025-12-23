@@ -1,13 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Helmet } from "react-helmet-async";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import ProductsSection from "@/components/ProductsSection";
+import BenefitsSection from "@/components/BenefitsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <Helmet>
+        <title>Crown Hair Systems | Premium Hair Solutions for Men in India</title>
+        <meta
+          name="description"
+          content="India's leading provider of premium, undetectable hair systems for men. Custom-fitted, 100% natural hair solutions. Book your free consultation today."
+        />
+        <meta
+          name="keywords"
+          content="hair systems India, men's hair replacement, toupee, hair solutions Mumbai, premium wigs for men"
+        />
+        <link rel="canonical" href="https://crownhairsystems.com" />
+      </Helmet>
+
+      <main className="min-h-screen bg-background overflow-x-hidden">
+        <Navbar />
+        <HeroSection />
+        <ProductsSection />
+        <BenefitsSection />
+        <TestimonialsSection />
+        <ContactSection />
+        <Footer />
+      </main>
+    </>
   );
 };
 

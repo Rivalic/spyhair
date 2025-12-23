@@ -6,35 +6,45 @@ import { Button } from "@/components/ui/button";
 const testimonials = [
   {
     id: 1,
-    name: "Rajesh Sharma",
+    name: "Rajesh Kumar",
     location: "Mumbai",
     rating: 5,
-    text: "After years of trying different solutions, Crown Hair Systems finally gave me what I was looking for. The quality is exceptional, and no one can tell it's not my natural hair. My confidence has completely transformed.",
-    occupation: "Business Executive",
+    text: "Absolutely life-changing! The hair system is so natural that even my close friends couldn't tell. The confidence boost is incredible.",
   },
   {
     id: 2,
-    name: "Vikram Patel",
+    name: "Amit Sharma",
     location: "Delhi",
     rating: 5,
-    text: "The consultation process was so thorough. They matched my hair color and texture perfectly. I was nervous at first, but the team made me feel comfortable. Best decision I ever made for myself.",
-    occupation: "Software Engineer",
+    text: "Best investment I've ever made. The quality is outstanding and the customer service is top-notch. Highly recommend SpyHair!",
   },
   {
     id: 3,
-    name: "Arjun Mehta",
+    name: "Vikram Patel",
     location: "Bangalore",
     rating: 5,
-    text: "I've been using Crown's Royal Crown system for 8 months now. The durability is impressive, and it styles exactly like natural hair. The investment was worth every rupee.",
-    occupation: "Film Producer",
+    text: "I was skeptical at first, but SpyHair exceeded all my expectations. Comfortable, natural-looking, and easy to maintain.",
   },
   {
     id: 4,
-    name: "Suresh Kumar",
+    name: "Arjun Mehta",
+    location: "Pune",
+    rating: 5,
+    text: "The transformation is amazing! I look 10 years younger. The team at SpyHair is professional and caring.",
+  },
+  {
+    id: 5,
+    name: "Karan Singh",
+    location: "Hyderabad",
+    rating: 5,
+    text: "Undetectable and comfortable. I can swim, exercise, and live my life without any worries. Thank you SpyHair!",
+  },
+  {
+    id: 6,
+    name: "Rohit Desai",
     location: "Chennai",
     rating: 5,
-    text: "What impressed me most was their aftercare support. Whenever I had questions about maintenance, they were always available. Truly a premium experience from start to finish.",
-    occupation: "Doctor",
+    text: "Premium quality at its finest. The attention to detail and customization options are impressive. Worth every rupee!",
   },
 ];
 
@@ -72,12 +82,33 @@ const TestimonialsSection = () => {
             Testimonials
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
-            Real <span className="text-gradient-gold italic">Transformations</span>
+            What Our <span className="text-gradient-gold italic">Customers Say</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Hear from our satisfied clients who have experienced the life-changing
-            impact of our premium hair systems.
+            Join thousands of satisfied customers who have transformed their lives with SpyHair
           </p>
+        </motion.div>
+
+        {/* Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-wrap justify-center gap-8 md:gap-16 mb-16"
+        >
+          <div className="text-center">
+            <div className="font-display text-4xl font-bold text-gradient-gold">20+</div>
+            <div className="text-muted-foreground text-sm mt-1">Testimonials</div>
+          </div>
+          <div className="text-center">
+            <div className="font-display text-4xl font-bold text-gradient-gold">4.9/5</div>
+            <div className="text-muted-foreground text-sm mt-1">Average Rating</div>
+          </div>
+          <div className="text-center">
+            <div className="font-display text-4xl font-bold text-gradient-gold">98%</div>
+            <div className="text-muted-foreground text-sm mt-1">Satisfaction Rate</div>
+          </div>
         </motion.div>
 
         {/* Testimonial Carousel */}
@@ -113,7 +144,7 @@ const TestimonialsSection = () => {
                     {testimonials[currentIndex].name}
                   </div>
                   <div className="text-muted-foreground text-sm">
-                    {testimonials[currentIndex].occupation} • {testimonials[currentIndex].location}
+                    {testimonials[currentIndex].location}
                   </div>
                 </div>
               </div>

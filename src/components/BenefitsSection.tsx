@@ -56,7 +56,7 @@ const BenefitsSection = () => {
             Why Choose Us
           </span>
           <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
-            The <span className="text-gradient-gold italic">Crown</span> Difference
+            The <span className="text-gradient-gold italic">SPYHAIR</span> Difference
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             We've helped thousands of Indian men regain their confidence with our

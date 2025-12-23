@@ -36,12 +36,12 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2">
+        <a href="#home" className="flex items-center gap-1">
           <span className="font-display text-2xl font-bold text-gradient-gold">
-            CROWN
+            SPY
           </span>
           <span className="font-display text-2xl font-light text-foreground">
-            Hair Systems
+            HAIR
           </span>
         </a>
 

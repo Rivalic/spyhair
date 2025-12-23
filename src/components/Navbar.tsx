@@ -38,10 +38,10 @@ const Navbar = () => {
         {/* Logo */}
         <a href="#home" className="flex items-center gap-1">
           <span className="font-display text-2xl font-bold text-gradient-gold">
-            SPY
+            3S
           </span>
           <span className="font-display text-2xl font-light text-foreground">
-            HAIR
+            Golden Hair
           </span>
         </a>
 

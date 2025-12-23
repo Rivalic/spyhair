@@ -33,10 +33,10 @@ const Footer = () => {
           <div className="lg:col-span-2">
           <div className="flex items-center gap-1 mb-6">
             <span className="font-display text-2xl font-bold text-gradient-gold">
-              SPY
+              3S
             </span>
             <span className="font-display text-2xl font-light text-foreground">
-              HAIR
+              Golden Hair
             </span>
           </div>
           <p className="text-muted-foreground leading-relaxed mb-6 max-w-sm">
@@ -123,7 +123,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-muted-foreground text-sm">
-            © {currentYear} SPYHAIR. All rights reserved.
+            © {currentYear} 3S Golden Hair. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <a href="#" className="hover:text-primary transition-colors">

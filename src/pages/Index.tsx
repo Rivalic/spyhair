@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import LifestyleGallerySection from "@/components/LifestyleGallerySection";
 import TransformationSection from "@/components/TransformationSection";
 import InstallationStepsSection from "@/components/InstallationStepsSection";
+import QualitySection from "@/components/QualitySection";
 import { ChatWidget } from "@/components/ChatWidget";
 import ProductsSection from "@/components/ProductsSection";
 import ProcessSection from "@/components/ProcessSection";
@@ -34,6 +35,7 @@ const Index = () => {
         <LifestyleGallerySection />
         <InstallationStepsSection />
         <TransformationSection />
+        <QualitySection />
         <ProductsSection />
         <ProcessSection />
         <BenefitsSection />

@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import { ChatWidget } from "@/components/ChatWidget";
 import ProductsSection from "@/components/ProductsSection";
 import ProcessSection from "@/components/ProcessSection";
 import BenefitsSection from "@/components/BenefitsSection";
@@ -33,6 +34,7 @@ const Index = () => {
         <TestimonialsSection />
         <ContactSection />
         <Footer />
+        <ChatWidget />
       </main>
     </>
   );

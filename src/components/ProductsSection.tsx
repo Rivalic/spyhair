@@ -124,8 +124,11 @@ const ProductsSection = () => {
                       {mainImage ? (
                         <img
                           src={mainImage.url}
-                          alt={mainImage.altText || product.node.title}
+                          alt={mainImage.altText || `${product.node.title} - Premium hair system by 3S Golden Hair`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          width={400}
+                          height={400}
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-secondary/50">

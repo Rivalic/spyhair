@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CartDrawer } from "@/components/CartDrawer";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
@@ -73,13 +72,12 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* CTA Button + Cart */}
+        {/* CTA Button */}
         <div className="hidden lg:flex items-center gap-4">
           <a href="tel:+917014512123" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
             <Phone className="w-4 h-4" />
             <span className="text-sm">+91 70145 12123</span>
           </a>
-          <CartDrawer />
           <Button variant="gold" size="lg">
             Book Consultation
           </Button>

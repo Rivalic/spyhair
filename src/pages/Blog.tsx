@@ -4,71 +4,37 @@ import { Calendar, User, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Ultimate Guide to Choosing Your First Hair System",
-    excerpt: "Everything you need to know about selecting the perfect hair system that matches your lifestyle, skin tone, and personal style preferences.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop",
-    author: "3S Golden Hair Team",
-    date: "December 20, 2025",
-    category: "Guide",
-    slug: "ultimate-guide-choosing-hair-system"
-  },
-  {
-    id: 2,
-    title: "Hair System Maintenance: Tips for Long-Lasting Results",
-    excerpt: "Learn the essential maintenance routines that will keep your hair system looking natural and extend its lifespan significantly.",
-    image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&h=400&fit=crop",
-    author: "3S Golden Hair Team",
-    date: "December 15, 2025",
-    category: "Tips",
-    slug: "hair-system-maintenance-tips"
-  },
-  {
-    id: 3,
-    title: "Understanding Different Hair System Base Materials",
-    excerpt: "A comprehensive breakdown of lace, skin, and mono bases - which one is right for you and your specific needs.",
-    image: "https://images.unsplash.com/photo-1559825481-12a05cc00344?w=600&h=400&fit=crop",
-    author: "3S Golden Hair Team",
-    date: "December 10, 2025",
-    category: "Education",
-    slug: "understanding-hair-system-base-materials"
-  },
-  {
-    id: 4,
-    title: "How to Style Your Hair System Like a Pro",
-    excerpt: "Professional styling techniques that will help you achieve any look with your hair system, from casual to formal.",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=400&fit=crop",
-    author: "3S Golden Hair Team",
-    date: "December 5, 2025",
-    category: "Styling",
-    slug: "style-hair-system-like-pro"
-  },
-  {
-    id: 5,
-    title: "Real Stories: Life-Changing Transformations",
-    excerpt: "Read inspiring stories from our clients who have regained their confidence and transformed their lives with our hair systems.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=400&fit=crop",
-    author: "3S Golden Hair Team",
-    date: "November 28, 2025",
-    category: "Stories",
-    slug: "real-stories-transformations"
-  },
-  {
-    id: 6,
-    title: "Debunking Common Hair System Myths",
-    excerpt: "Let's separate fact from fiction and address the most common misconceptions about modern hair replacement systems.",
-    image: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&h=400&fit=crop",
-    author: "3S Golden Hair Team",
-    date: "November 20, 2025",
-    category: "Education",
-    slug: "debunking-hair-system-myths"
-  }
-];
+import { blogPosts } from "@/data/blogPosts";
 
 const Blog = () => {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "3S Golden Hair Blog",
+    "description": "Expert tips, guides, and stories about hair systems and hair replacement solutions.",
+    "url": "https://3sgoldenhair.com/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "3S Golden Hair",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://3sgoldenhair.com/logo.png"
+      }
+    },
+    "blogPost": blogPosts.map(post => ({
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt,
+      "image": post.image,
+      "datePublished": post.dateISO,
+      "author": {
+        "@type": "Organization",
+        "name": post.author
+      },
+      "url": `https://3sgoldenhair.com/blog/${post.slug}`
+    }))
+  };
+
   return (
     <>
       <Helmet>
@@ -77,6 +43,16 @@ const Blog = () => {
           name="description"
           content="Expert tips, guides, and stories about hair systems. Learn maintenance, styling, and get inspired by real transformation stories."
         />
+        <link rel="canonical" href="https://3sgoldenhair.com/blog" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Blog | 3S Golden Hair" />
+        <meta property="og:description" content="Expert tips, guides, and stories about hair systems." />
+        <meta property="og:url" content="https://3sgoldenhair.com/blog" />
+        <meta property="og:type" content="website" />
+        
+        {/* Structured Data */}
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
       <main className="min-h-screen bg-background">
@@ -117,25 +93,28 @@ const Blog = () => {
                   className="group bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-300"
                 >
                   {/* Image */}
-                  <div className="relative h-48 overflow-hidden">
+                  <Link to={`/blog/${post.slug}`} className="block relative h-48 overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      width={600}
+                      height={400}
                     />
                     <div className="absolute top-4 left-4">
                       <span className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
                         {post.category}
                       </span>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Content */}
                   <div className="p-6">
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        {post.date}
+                        <time dateTime={post.dateISO}>{post.date}</time>
                       </span>
                       <span className="flex items-center gap-1">
                         <User className="w-4 h-4" />
@@ -144,17 +123,20 @@ const Blog = () => {
                     </div>
 
                     <h2 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                      {post.title}
+                      <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                     </h2>
 
                     <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
 
-                    <button className="inline-flex items-center gap-2 text-primary font-medium text-sm group/btn">
+                    <Link 
+                      to={`/blog/${post.slug}`}
+                      className="inline-flex items-center gap-2 text-primary font-medium text-sm group/btn"
+                    >
                       Read More
                       <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
-                    </button>
+                    </Link>
                   </div>
                 </motion.article>
               ))}

@@ -1,0 +1,11 @@
+name,description_sale,list_price,categ_id,type,default_code,product_variant_ids/product_template_attribute_value_ids/attribute_id,product_variant_ids/product_template_attribute_value_ids/name
+LOS ANGELES,Premium hair system with natural look and feel,8000,Hair Systems,product,LA-001,Color,Natural Black
+AUSTRALIAN PREMIUM,High-quality Australian hair system,15000,Hair Systems,product,AUS-PREM-001,Color,Natural Black
+AUSTRALIAN MIRAGE,Premium mirage finish Australian system,20000,Hair Systems,product,AUS-MIR-001,Color,Natural Black
+BMW PREMIUM,Luxury BMW premium hair system,8000,Hair Systems,product,BMW-PREM-001,Color,Natural Black
+Q6 PREMIUM,Q6 premium quality hair system,8000,Hair Systems,product,Q6-PREM-001,Color,Natural Black
+OCTAGON,Premium octagon base hair system,25000,Hair Systems,product,OCT-001,Color,Natural Black
+GOLDEN MIRAGE PREMIUM,Golden mirage premium hair system,20000,Hair Systems,product,GOLD-MIR-001,Color,Natural Black
+BRITISH MIRAGE,British mirage quality hair system,15000,Hair Systems,product,BRIT-MIR-001,Color,Natural Black
+WAVE,Natural wave pattern hair system,20000,Hair Systems,product,WAVE-001,Color,Natural Black
+INDIAN SCALP,Premium Indian scalp hair system,20000,Hair Systems,product,IND-SCALP-001,Color,Natural Black

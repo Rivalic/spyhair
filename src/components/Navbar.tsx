@@ -25,6 +25,7 @@ const Navbar = () => {
     { name: "Why Us", href: isHomePage ? "#benefits" : "/#benefits", isRoute: !isHomePage },
     { name: "Blog", href: "/blog", isRoute: true },
     { name: "Contact", href: isHomePage ? "#contact" : "/#contact", isRoute: !isHomePage },
+    { name: "Admin", href: "/admin/orders", isRoute: true },
   ];
 
   return (

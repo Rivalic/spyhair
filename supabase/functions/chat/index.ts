@@ -5,6 +5,61 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const MAX_MESSAGES = 50;
+const MAX_MESSAGE_LENGTH = 10000;
+const VALID_ROLES = ["user", "assistant"];
+
+interface ChatMessage {
+  role: string;
+  content: string;
+}
+
+function validateMessages(messages: unknown): { valid: boolean; error?: string; messages?: ChatMessage[] } {
+  if (!Array.isArray(messages)) {
+    return { valid: false, error: "Messages must be an array" };
+  }
+
+  if (messages.length === 0) {
+    return { valid: false, error: "Messages array cannot be empty" };
+  }
+
+  if (messages.length > MAX_MESSAGES) {
+    return { valid: false, error: `Too many messages. Maximum allowed: ${MAX_MESSAGES}` };
+  }
+
+  const validatedMessages: ChatMessage[] = [];
+
+  for (let i = 0; i < messages.length; i++) {
+    const msg = messages[i];
+
+    if (typeof msg !== "object" || msg === null) {
+      return { valid: false, error: `Message at index ${i} is invalid` };
+    }
+
+    const { role, content } = msg as Record<string, unknown>;
+
+    if (typeof role !== "string" || !VALID_ROLES.includes(role)) {
+      return { valid: false, error: `Invalid role at index ${i}. Must be 'user' or 'assistant'` };
+    }
+
+    if (typeof content !== "string") {
+      return { valid: false, error: `Content at index ${i} must be a string` };
+    }
+
+    if (content.length === 0) {
+      return { valid: false, error: `Content at index ${i} cannot be empty` };
+    }
+
+    if (content.length > MAX_MESSAGE_LENGTH) {
+      return { valid: false, error: `Message at index ${i} exceeds maximum length of ${MAX_MESSAGE_LENGTH} characters` };
+    }
+
+    validatedMessages.push({ role, content: content.trim() });
+  }
+
+  return { valid: true, messages: validatedMessages };
+}
+
 const systemPrompt = `You are a friendly and knowledgeable AI assistant for 3S Golden Hair, a premium hair systems company based in India. You help customers with questions about:
 
 **Products & Pricing:**
@@ -42,7 +97,19 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const body = await req.json();
+    
+    // Validate input messages
+    const validation = validateMessages(body.messages);
+    if (!validation.valid) {
+      console.error("Input validation failed:", validation.error);
+      return new Response(
+        JSON.stringify({ error: validation.error }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const messages = validation.messages!;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
@@ -50,7 +117,7 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    console.log("Starting chat request with", messages.length, "messages");
+    console.log("Starting chat request with", messages.length, "validated messages");
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",

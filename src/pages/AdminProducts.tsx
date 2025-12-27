@@ -11,7 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
-import { Plus, Trash2, Edit, Package, ArrowLeft, ChevronDown, ChevronUp } from 'lucide-react';
+import { Plus, Trash2, Edit, Package, ArrowLeft, ChevronDown, ChevronUp, Video } from 'lucide-react';
 
 interface ProductVariant {
   id: string;
@@ -29,6 +29,7 @@ interface Product {
   description: string | null;
   base_price: number;
   image_url: string | null;
+  video_url: string | null;
   is_active: boolean;
   created_at: string;
   updated_at: string;
@@ -50,6 +51,7 @@ const AdminProducts = () => {
     description: '',
     base_price: '',
     image_url: '',
+    video_url: '',
     is_active: true,
   });
   
@@ -115,6 +117,7 @@ const AdminProducts = () => {
       description: '',
       base_price: '',
       image_url: '',
+      video_url: '',
       is_active: true,
     });
     setEditingProduct(null);
@@ -127,6 +130,7 @@ const AdminProducts = () => {
       description: product.description || '',
       base_price: String(product.base_price),
       image_url: product.image_url || '',
+      video_url: product.video_url || '',
       is_active: product.is_active,
     });
     setIsProductDialogOpen(true);
@@ -143,6 +147,7 @@ const AdminProducts = () => {
       description: productForm.description.trim() || null,
       base_price: parseInt(productForm.base_price) || 0,
       image_url: productForm.image_url.trim() || null,
+      video_url: productForm.video_url.trim() || null,
       is_active: productForm.is_active,
     };
 
@@ -322,6 +327,15 @@ const AdminProducts = () => {
                     placeholder="https://example.com/image.jpg"
                   />
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="video_url">Video URL (Streamable)</Label>
+                  <Input
+                    id="video_url"
+                    value={productForm.video_url}
+                    onChange={(e) => setProductForm({ ...productForm, video_url: e.target.value })}
+                    placeholder="https://streamable.com/e/xxxxx"
+                  />
+                </div>
                 <div className="flex items-center justify-between">
                   <Label htmlFor="is_active">Active</Label>
                   <Switch
@@ -371,18 +385,23 @@ const AdminProducts = () => {
                           <ChevronDown className="h-5 w-5" />
                         )}
                       </button>
-                      <div>
-                        <CardTitle className="text-lg flex items-center gap-2">
-                          {product.name}
-                          {!product.is_active && (
-                            <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded">
-                              Inactive
-                            </span>
-                          )}
-                        </CardTitle>
-                        <p className="text-sm text-muted-foreground">
-                          Base: ₹{product.base_price.toLocaleString()} • {product.variants?.length || 0} variants
-                        </p>
+                      <div className="flex items-center gap-3">
+                        {product.video_url && (
+                          <Video className="h-4 w-4 text-primary" />
+                        )}
+                        <div>
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            {product.name}
+                            {!product.is_active && (
+                              <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded">
+                                Inactive
+                              </span>
+                            )}
+                          </CardTitle>
+                          <p className="text-sm text-muted-foreground">
+                            Base: ₹{product.base_price.toLocaleString()} • {product.variants?.length || 0} variants
+                          </p>
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -398,6 +417,17 @@ const AdminProducts = () => {
                 
                 {expandedProduct === product.id && (
                   <CardContent>
+                    {product.video_url && (
+                      <div className="mb-4 rounded-lg overflow-hidden aspect-video max-w-md">
+                        <iframe
+                          src={`${product.video_url}?autoplay=1&muted=1&loop=1&controls=0`}
+                          className="w-full h-full"
+                          allow="autoplay; fullscreen"
+                          allowFullScreen
+                        />
+                      </div>
+                    )}
+                    
                     {product.description && (
                       <p className="text-sm text-muted-foreground mb-4">{product.description}</p>
                     )}

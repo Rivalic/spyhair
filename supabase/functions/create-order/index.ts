@@ -104,7 +104,6 @@ serve(async (req) => {
   const rateLimit = checkRateLimit(clientId);
   
   if (!rateLimit.allowed) {
-    console.warn(`Rate limit exceeded for client: ${clientId}`);
     return new Response(
       JSON.stringify({ error: "Too many order attempts. Please try again in a moment." }),
       { 
@@ -132,7 +131,6 @@ serve(async (req) => {
 
     // Validate product details
     if (!product_id || !product_name || !product_price || product_price <= 0) {
-      console.error("Invalid product details:", { product_id, product_name, product_price });
       return new Response(
         JSON.stringify({ error: "Invalid product details" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -197,14 +195,11 @@ serve(async (req) => {
       .single();
 
     if (error) {
-      console.error("Database error:", error);
       return new Response(
         JSON.stringify({ error: "Failed to create order. Please try again." }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-
-    console.log("COD order created successfully:", data.id);
 
     return new Response(
       JSON.stringify({ 
@@ -215,7 +210,6 @@ serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
-    console.error("Create order error:", error);
     return new Response(
       JSON.stringify({ error: "Internal server error" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }

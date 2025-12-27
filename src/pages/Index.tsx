@@ -12,6 +12,7 @@ import BenefitsSection from "@/components/BenefitsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
@@ -43,6 +44,7 @@ const Index = () => {
         <ContactSection />
         <Footer />
         <ChatWidget />
+        <WhatsAppButton />
       </main>
     </>
   );

@@ -243,7 +243,10 @@ const ProductsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="group relative bg-card rounded-2xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-500">
+              <div 
+                className="group relative bg-card rounded-2xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-500 cursor-pointer"
+                onClick={() => handleBuyNow(product)}
+              >
                 {/* Product Image */}
                 <div className="relative aspect-square overflow-hidden bg-charcoal">
                   <img
@@ -276,7 +279,10 @@ const ProductsSection = () => {
                         variant="gold" 
                         size="sm"
                         className="flex-1"
-                        onClick={() => handleBuyNow(product)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleBuyNow(product);
+                        }}
                         disabled={isLoading || isVerifying}
                       >
                         {isLoading || isVerifying ? (
@@ -289,7 +295,10 @@ const ProductsSection = () => {
                         variant="goldOutline" 
                         size="sm"
                         className="flex-1"
-                        onClick={() => handleCodOrder(product)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleCodOrder(product);
+                        }}
                         disabled={isLoading || isVerifying}
                       >
                         COD

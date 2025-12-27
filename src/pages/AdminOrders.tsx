@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Search, 
@@ -14,7 +14,8 @@ import {
   Phone,
   MapPin,
   CreditCard,
-  Banknote
+  Banknote,
+  ShoppingBag
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -232,9 +233,22 @@ const AdminOrders = () => {
       {/* Header */}
       <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Package className="h-6 w-6 text-primary" />
-            <h1 className="font-display text-xl font-bold text-foreground">Order Management</h1>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <Package className="h-6 w-6 text-primary" />
+              <h1 className="font-display text-xl font-bold text-foreground">Admin Dashboard</h1>
+            </div>
+            <nav className="hidden md:flex items-center gap-1">
+              <Button variant="ghost" size="sm" className="text-primary" asChild>
+                <Link to="/admin/orders">Orders</Link>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/admin/products">
+                  <ShoppingBag className="h-4 w-4 mr-1" />
+                  Products
+                </Link>
+              </Button>
+            </nav>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground hidden sm:block">

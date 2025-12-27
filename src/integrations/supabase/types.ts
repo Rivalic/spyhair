@@ -119,6 +119,7 @@ export type Database = {
           is_active: boolean
           name: string
           updated_at: string
+          video_url: string | null
         }
         Insert: {
           base_price?: number
@@ -129,6 +130,7 @@ export type Database = {
           is_active?: boolean
           name: string
           updated_at?: string
+          video_url?: string | null
         }
         Update: {
           base_price?: number
@@ -139,6 +141,7 @@ export type Database = {
           is_active?: boolean
           name?: string
           updated_at?: string
+          video_url?: string | null
         }
         Relationships: []
       }

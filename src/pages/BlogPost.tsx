@@ -2,10 +2,11 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Calendar, User, ArrowLeft, Clock, ChevronRight } from "lucide-react";
+import DOMPurify from "dompurify";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getBlogPostBySlug, blogPosts } from "@/data/blogPosts";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -17,6 +18,15 @@ const BlogPost = () => {
       navigate("/blog", { replace: true });
     }
   }, [post, navigate]);
+
+  // Sanitize blog content to prevent XSS attacks
+  const sanitizedContent = useMemo(() => {
+    if (!post) return "";
+    return DOMPurify.sanitize(post.content, {
+      ALLOWED_TAGS: ['p', 'h2', 'h3', 'h4', 'ul', 'ol', 'li', 'strong', 'em', 'a', 'br', 'span', 'div', 'img'],
+      ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'src', 'alt', 'width', 'height'],
+    });
+  }, [post]);
 
   if (!post) {
     return null;
@@ -190,7 +200,7 @@ const BlogPost = () => {
                 prose-strong:text-foreground
                 prose-ul:text-muted-foreground prose-li:marker:text-primary
                 prose-img:rounded-lg"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
             />
 
             {/* Back to Blog */}

@@ -1,9 +1,42 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
+// Allowed origins for CORS - add your production domains here
+const allowedOrigins = [
+  "https://3sgoldenhair.com",
+  "https://www.3sgoldenhair.com",
+  "http://localhost:8080",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+
+// Also allow Lovable preview domains
+function isAllowedOrigin(origin: string | null): boolean {
+  if (!origin) return false;
+  
+  // Check exact matches
+  if (allowedOrigins.includes(origin)) return true;
+  
+  // Allow Lovable preview domains (*.lovableproject.com, *.lovable.app)
+  if (origin.endsWith(".lovableproject.com") || origin.endsWith(".lovable.app")) {
+    return true;
+  }
+  
+  return false;
+}
+
+function getCorsHeaders(req: Request): Record<string, string> {
+  const origin = req.headers.get("origin");
+  
+  // If origin is allowed, return it; otherwise use a safe default
+  const allowedOrigin = isAllowedOrigin(origin) ? origin! : allowedOrigins[0];
+  
+  return {
+    "Access-Control-Allow-Origin": allowedOrigin,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Credentials": "true",
+    "Vary": "Origin",
+  };
+}
 
 const MAX_MESSAGES = 50;
 const MAX_MESSAGE_LENGTH = 10000;
@@ -92,6 +125,8 @@ Be helpful, empathetic, and professional. If asked about specific pricing, provi
 Keep responses concise but informative. Use a warm, reassuring tone - many customers may feel self-conscious about hair loss.`;
 
 serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
+  
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }

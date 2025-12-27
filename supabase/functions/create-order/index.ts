@@ -31,6 +31,57 @@ function getCorsHeaders(req: Request): Record<string, string> {
   };
 }
 
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 5; // 5 orders per minute per IP
+
+interface RateLimitEntry {
+  count: number;
+  resetAt: number;
+}
+
+const rateLimits = new Map<string, RateLimitEntry>();
+
+function getClientIdentifier(req: Request): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) {
+    return `order-${forwarded.split(",")[0].trim()}`;
+  }
+  const realIp = req.headers.get("x-real-ip");
+  if (realIp) {
+    return `order-${realIp}`;
+  }
+  const userAgent = req.headers.get("user-agent") || "unknown";
+  const origin = req.headers.get("origin") || "unknown";
+  return `order-${origin}-${userAgent.slice(0, 50)}`;
+}
+
+function checkRateLimit(identifier: string): { allowed: boolean; remaining: number; resetAt: number } {
+  const now = Date.now();
+  const entry = rateLimits.get(identifier);
+  
+  // Clean up old entries periodically
+  if (rateLimits.size > 10000) {
+    for (const [key, val] of rateLimits.entries()) {
+      if (now > val.resetAt) {
+        rateLimits.delete(key);
+      }
+    }
+  }
+  
+  if (!entry || now > entry.resetAt) {
+    rateLimits.set(identifier, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW - 1, resetAt: now + RATE_LIMIT_WINDOW_MS };
+  }
+  
+  if (entry.count >= MAX_REQUESTS_PER_WINDOW) {
+    return { allowed: false, remaining: 0, resetAt: entry.resetAt };
+  }
+  
+  entry.count++;
+  return { allowed: true, remaining: MAX_REQUESTS_PER_WINDOW - entry.count, resetAt: entry.resetAt };
+}
+
 interface CreateOrderRequest {
   product_id: string;
   product_name: string;
@@ -46,6 +97,25 @@ serve(async (req) => {
   
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Apply rate limiting
+  const clientId = getClientIdentifier(req);
+  const rateLimit = checkRateLimit(clientId);
+  
+  if (!rateLimit.allowed) {
+    console.warn(`Rate limit exceeded for client: ${clientId}`);
+    return new Response(
+      JSON.stringify({ error: "Too many order attempts. Please try again in a moment." }),
+      { 
+        status: 429, 
+        headers: { 
+          ...corsHeaders, 
+          "Content-Type": "application/json",
+          "Retry-After": String(Math.ceil((rateLimit.resetAt - Date.now()) / 1000)),
+        } 
+      }
+    );
   }
 
   try {

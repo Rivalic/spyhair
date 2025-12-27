@@ -33,11 +33,11 @@ const Index = () => {
       <main className="min-h-screen bg-background overflow-x-hidden">
         <Navbar />
         <HeroSection />
+        <ProductsSection />
         <LifestyleGallerySection />
         <InstallationStepsSection />
         <TransformationSection />
         <QualitySection />
-        <ProductsSection />
         <ProcessSection />
         <BenefitsSection />
         <TestimonialsSection />

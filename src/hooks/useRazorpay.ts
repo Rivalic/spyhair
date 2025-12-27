@@ -4,12 +4,13 @@ import { useToast } from '@/hooks/use-toast';
 
 interface RazorpayOptions {
   amount: number;
+  productId: string;
   productName: string;
   productDescription?: string;
-  customerName?: string;
-  customerEmail?: string;
-  customerPhone?: string;
-  onSuccess?: (response: RazorpaySuccessResponse) => void;
+  customerName: string;
+  customerPhone: string;
+  customerAddress: string;
+  onSuccess?: (response: RazorpaySuccessResponse & { order_id?: string }) => void;
   onError?: (error: Error) => void;
 }
 
@@ -68,15 +69,17 @@ const loadRazorpayScript = (): Promise<boolean> => {
 
 export const useRazorpay = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const { toast } = useToast();
 
   const initiatePayment = useCallback(async ({
     amount,
+    productId,
     productName,
     productDescription,
     customerName,
-    customerEmail,
     customerPhone,
+    customerAddress,
     onSuccess,
     onError,
   }: RazorpayOptions) => {
@@ -115,18 +118,58 @@ export const useRazorpay = () => {
         order_id: orderId,
         prefill: {
           name: customerName,
-          email: customerEmail,
           contact: customerPhone,
         },
         theme: {
           color: '#D4A84B', // Gold color matching the brand
         },
-        handler: (response) => {
-          toast({
-            title: 'Payment Successful!',
-            description: `Payment ID: ${response.razorpay_payment_id}`,
-          });
-          onSuccess?.(response);
+        handler: async (response) => {
+          // Don't trust client-side success immediately - verify server-side
+          setIsVerifying(true);
+          
+          try {
+            const { data: verifyData, error: verifyError } = await supabase.functions.invoke(
+              'verify-razorpay-payment',
+              {
+                body: {
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_signature: response.razorpay_signature,
+                  product_id: productId,
+                  product_name: productName,
+                  product_price: amount,
+                  customer_name: customerName,
+                  customer_phone: customerPhone,
+                  customer_address: customerAddress,
+                },
+              }
+            );
+
+            if (verifyError || !verifyData?.verified) {
+              throw new Error(verifyData?.error || 'Payment verification failed');
+            }
+
+            toast({
+              title: 'Payment Successful!',
+              description: `Your order has been confirmed. Order ID: ${verifyData.order_id?.slice(0, 8)}...`,
+            });
+            
+            onSuccess?.({
+              ...response,
+              order_id: verifyData.order_id,
+            });
+          } catch (verifyErr) {
+            console.error('Payment verification error:', verifyErr);
+            toast({
+              title: 'Verification Failed',
+              description: verifyErr instanceof Error ? verifyErr.message : 'Payment could not be verified. Please contact support.',
+              variant: 'destructive',
+            });
+            onError?.(verifyErr instanceof Error ? verifyErr : new Error('Verification failed'));
+          } finally {
+            setIsVerifying(false);
+            setIsLoading(false);
+          }
         },
         modal: {
           ondismiss: () => {
@@ -145,6 +188,7 @@ export const useRazorpay = () => {
           variant: 'destructive',
         });
         onError?.(error);
+        setIsLoading(false);
       });
 
       razorpay.open();
@@ -156,10 +200,9 @@ export const useRazorpay = () => {
         variant: 'destructive',
       });
       onError?.(error instanceof Error ? error : new Error('Payment failed'));
-    } finally {
       setIsLoading(false);
     }
   }, [toast]);
 
-  return { initiatePayment, isLoading };
+  return { initiatePayment, isLoading, isVerifying };
 };

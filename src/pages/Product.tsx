@@ -48,8 +48,6 @@ const Product = () => {
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"online" | "cod">("online");
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [customerForm, setCustomerForm] = useState({
     name: "",
     phone: "",
@@ -107,12 +105,6 @@ const Product = () => {
   }, [id, toast]);
 
   const handleBuyNow = () => {
-    setPaymentMethod("online");
-    setDialogOpen(true);
-  };
-
-  const handleCodOrder = () => {
-    setPaymentMethod("cod");
     setDialogOpen(true);
   };
 
@@ -162,71 +154,28 @@ const Product = () => {
     const price = getCurrentPrice();
     const productName = getProductName();
 
-    if (paymentMethod === "online") {
-      setDialogOpen(false);
-      
-      initiatePayment({
-        amount: price,
-        productId: product.id,
-        productName: productName,
-        productDescription: product.description || "",
-        customerName: customerForm.name.trim(),
-        customerPhone: customerForm.phone.replace(/[\s-]/g, ""),
-        customerAddress: customerForm.address.trim(),
-        onSuccess: (response) => {
-          console.log('Payment verified:', response);
-          setCustomerForm({ name: "", phone: "", address: "" });
-        },
-        onError: (error) => {
-          console.error('Payment failed:', error);
-        },
-      });
-    } else {
-      setIsSubmitting(true);
-      
-      try {
-        const { data, error } = await supabase.functions.invoke('create-order', {
-          body: {
-            product_id: product.id,
-            product_name: productName,
-            product_price: price,
-            customer_name: customerForm.name.trim(),
-            customer_phone: customerForm.phone.replace(/[\s-]/g, ""),
-            customer_address: customerForm.address.trim(),
-            payment_method: 'cod',
-          },
-        });
-
-        if (error) {
-          throw new Error(error.message || 'Failed to place order');
-        }
-
-        if (data?.error) {
-          throw new Error(data.error);
-        }
-
-        toast({
-          title: "COD Order Placed!",
-          description: `Your order for ${productName} has been confirmed. Order ID: ${data.order_id?.slice(0, 8)}... Pay ${formatPrice(price)} on delivery.`,
-        });
-        
-        setDialogOpen(false);
+    setDialogOpen(false);
+    
+    initiatePayment({
+      amount: price,
+      productId: product.id,
+      productName: productName,
+      productDescription: product.description || "",
+      customerName: customerForm.name.trim(),
+      customerPhone: customerForm.phone.replace(/[\s-]/g, ""),
+      customerAddress: customerForm.address.trim(),
+      onSuccess: (response) => {
+        console.log('Payment verified:', response);
         setCustomerForm({ name: "", phone: "", address: "" });
-      } catch (error) {
-        console.error('COD order error:', error);
-        toast({
-          title: "Order Failed",
-          description: error instanceof Error ? error.message : "Please try again",
-          variant: "destructive",
-        });
-      } finally {
-        setIsSubmitting(false);
-      }
-    }
+      },
+      onError: (error) => {
+        console.error('Payment failed:', error);
+      },
+    });
   };
 
   const handleDialogClose = (open: boolean) => {
-    if (!open && !isSubmitting) {
+    if (!open) {
       setDialogOpen(false);
       setCustomerForm({ name: "", phone: "", address: "" });
     }
@@ -337,31 +286,19 @@ const Product = () => {
                 </span>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  variant="gold"
-                  size="xl"
-                  className="flex-1"
-                  onClick={handleBuyNow}
-                  disabled={isLoading || isVerifying}
-                >
-                  {isLoading || isVerifying ? (
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                  ) : (
-                    "Pay Online"
-                  )}
-                </Button>
-                <Button
-                  variant="goldOutline"
-                  size="xl"
-                  className="flex-1"
-                  onClick={handleCodOrder}
-                  disabled={isLoading || isVerifying}
-                >
-                  Cash on Delivery
-                </Button>
-              </div>
+              {/* CTA Button */}
+              <Button
+                variant="gold"
+                size="xl"
+                onClick={handleBuyNow}
+                disabled={isLoading || isVerifying}
+              >
+                {isLoading || isVerifying ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : (
+                  "Buy Now"
+                )}
+              </Button>
 
               {/* Features */}
               <div className="mt-12 pt-8 border-t border-border/50">
@@ -397,13 +334,12 @@ const Product = () => {
         <DialogContent className="bg-card border-border">
           <DialogHeader>
             <DialogTitle className="font-display text-xl">
-              {paymentMethod === "online" ? "Complete Your Purchase" : "Cash on Delivery Order"}
+              Complete Your Purchase
             </DialogTitle>
             <DialogDescription>
               <span>
                 Order <strong>{getProductName()}</strong> for{" "}
                 <strong className="text-primary">{formatPrice(getCurrentPrice())}</strong>
-                {paymentMethod === "cod" && " (Pay on delivery)"}
               </span>
             </DialogDescription>
           </DialogHeader>
@@ -415,7 +351,6 @@ const Product = () => {
                 placeholder="Enter your full name"
                 value={customerForm.name}
                 onChange={(e) => setCustomerForm({ ...customerForm, name: e.target.value })}
-                disabled={isSubmitting}
                 maxLength={100}
               />
             </div>
@@ -426,7 +361,6 @@ const Product = () => {
                 placeholder="Enter 10-digit phone number"
                 value={customerForm.phone}
                 onChange={(e) => setCustomerForm({ ...customerForm, phone: e.target.value })}
-                disabled={isSubmitting}
                 maxLength={15}
               />
             </div>
@@ -437,7 +371,6 @@ const Product = () => {
                 placeholder="Enter your complete delivery address"
                 value={customerForm.address}
                 onChange={(e) => setCustomerForm({ ...customerForm, address: e.target.value })}
-                disabled={isSubmitting}
                 maxLength={500}
               />
             </div>
@@ -445,18 +378,9 @@ const Product = () => {
               variant="gold" 
               className="w-full" 
               onClick={handleSubmit}
-              disabled={isSubmitting || isLoading}
+              disabled={isLoading}
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Placing Order...
-                </>
-              ) : paymentMethod === "online" ? (
-                "Proceed to Payment"
-              ) : (
-                "Place COD Order"
-              )}
+              Proceed to Payment
             </Button>
           </div>
         </DialogContent>

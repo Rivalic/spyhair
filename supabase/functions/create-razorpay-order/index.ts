@@ -101,7 +101,6 @@ serve(async (req) => {
   const rateLimit = checkRateLimit(clientId);
   
   if (!rateLimit.allowed) {
-    console.warn(`Rate limit exceeded for client: ${clientId}`);
     return new Response(
       JSON.stringify({ error: "Too many payment attempts. Please try again in a moment." }),
       { 
@@ -120,7 +119,6 @@ serve(async (req) => {
 
     // Validate amount
     if (!amount || typeof amount !== "number" || amount <= 0 || amount > 10000000) {
-      console.error("Invalid amount provided:", amount);
       return new Response(
         JSON.stringify({ error: "Invalid amount. Must be between 1 and 10,000,000" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -131,7 +129,6 @@ serve(async (req) => {
     const keySecret = Deno.env.get("RAZORPAY_KEY_SECRET");
 
     if (!keyId || !keySecret) {
-      console.error("Razorpay credentials not configured");
       return new Response(
         JSON.stringify({ error: "Payment gateway not configured" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -148,8 +145,6 @@ serve(async (req) => {
       notes: notes || {},
     };
 
-    console.log("Creating Razorpay order:", { ...orderData, amount: orderData.amount / 100 });
-
     const response = await fetch("https://api.razorpay.com/v1/orders", {
       method: "POST",
       headers: {
@@ -162,14 +157,11 @@ serve(async (req) => {
     const order = await response.json();
 
     if (!response.ok) {
-      console.error("Razorpay API error:", order);
       return new Response(
-        JSON.stringify({ error: order.error?.description || "Failed to create order" }),
+        JSON.stringify({ error: "Failed to create payment order" }),
         { status: response.status, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-
-    console.log("Order created successfully:", order.id);
 
     return new Response(
       JSON.stringify({ 
@@ -181,10 +173,8 @@ serve(async (req) => {
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
-    console.error("Error creating Razorpay order:", error);
-    const errorMessage = error instanceof Error ? error.message : "Internal server error";
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({ error: "Internal server error" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }

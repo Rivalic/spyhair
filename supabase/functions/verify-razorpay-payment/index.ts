@@ -89,7 +89,6 @@ serve(async (req) => {
 
     // Validate required fields
     if (!razorpay_payment_id || !razorpay_order_id || !razorpay_signature) {
-      console.error("Missing payment verification fields");
       return new Response(
         JSON.stringify({ verified: false, error: "Missing payment details" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -122,7 +121,6 @@ serve(async (req) => {
 
     const keySecret = Deno.env.get("RAZORPAY_KEY_SECRET");
     if (!keySecret) {
-      console.error("RAZORPAY_KEY_SECRET not configured");
       return new Response(
         JSON.stringify({ verified: false, error: "Configuration error" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -135,14 +133,7 @@ serve(async (req) => {
 
     const isVerified = expectedSignature === razorpay_signature;
 
-    console.log("Payment verification:", {
-      razorpay_order_id,
-      razorpay_payment_id,
-      verified: isVerified,
-    });
-
     if (!isVerified) {
-      console.error("Signature verification failed");
       return new Response(
         JSON.stringify({ verified: false, error: "Payment verification failed" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -177,7 +168,6 @@ serve(async (req) => {
       .single();
 
     if (orderError) {
-      console.error("Failed to store order:", orderError);
       // Payment was verified but order storage failed - still return verified
       // The payment is real, we should not fail the user
       return new Response(
@@ -189,8 +179,6 @@ serve(async (req) => {
       );
     }
 
-    console.log("Order stored successfully:", orderData.id);
-
     return new Response(
       JSON.stringify({ 
         verified: true, 
@@ -200,7 +188,6 @@ serve(async (req) => {
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
-    console.error("Payment verification error:", error);
     return new Response(
       JSON.stringify({ verified: false, error: "Verification failed" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }

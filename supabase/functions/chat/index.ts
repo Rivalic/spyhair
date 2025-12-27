@@ -189,7 +189,6 @@ serve(async (req) => {
   const rateLimit = checkRateLimit(clientId);
   
   if (!rateLimit.allowed) {
-    console.warn(`Rate limit exceeded for client: ${clientId}`);
     return new Response(
       JSON.stringify({ error: "Too many requests. Please try again in a moment." }),
       { 
@@ -210,7 +209,6 @@ serve(async (req) => {
     // Validate input messages
     const validation = validateMessages(body.messages);
     if (!validation.valid) {
-      console.error("Input validation failed:", validation.error);
       return new Response(
         JSON.stringify({ error: validation.error }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -221,11 +219,8 @@ serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
-      console.error("LOVABLE_API_KEY is not configured");
-      throw new Error("LOVABLE_API_KEY is not configured");
+      throw new Error("AI service not configured");
     }
-
-    console.log("Starting chat request with", messages.length, "validated messages");
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -244,9 +239,6 @@ serve(async (req) => {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error("AI gateway error:", response.status, errorText);
-      
       if (response.status === 429) {
         return new Response(
           JSON.stringify({ error: "We're experiencing high demand. Please try again in a moment." }),
@@ -265,8 +257,6 @@ serve(async (req) => {
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-
-    console.log("Streaming response started");
     
     return new Response(response.body, {
       headers: { 
@@ -276,9 +266,8 @@ serve(async (req) => {
       },
     });
   } catch (error) {
-    console.error("Chat function error:", error);
     return new Response(
-      JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error" }),
+      JSON.stringify({ error: "Service temporarily unavailable" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }

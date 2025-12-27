@@ -1,0 +1,2 @@
+COMMENT ON FUNCTION public.has_role(uuid, public.app_role)
+IS 'SECURITY DEFINER is required to safely check roles inside RLS policies (avoids RLS recursion). Keep this function read-only, boolean-returning, with fixed search_path and no dynamic SQL. Do not expand it to expose role data.';

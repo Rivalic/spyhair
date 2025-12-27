@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRazorpay } from "@/hooks/useRazorpay";
 
 // Static products data
 const products = [
@@ -67,6 +67,19 @@ const formatPrice = (amount: number) => {
 };
 
 const ProductsSection = () => {
+  const { initiatePayment, isLoading } = useRazorpay();
+
+  const handleBuyNow = (product: typeof products[0]) => {
+    initiatePayment({
+      amount: product.price,
+      productName: product.title,
+      productDescription: product.description,
+      onSuccess: (response) => {
+        console.log('Payment successful:', response);
+      },
+    });
+  };
+
   return (
     <section id="products" className="py-24 bg-gradient-dark">
       <div className="container mx-auto px-4">
@@ -127,9 +140,16 @@ const ProductsSection = () => {
                     <span className="font-display text-2xl font-bold text-gradient-gold">
                       {formatPrice(product.price)}
                     </span>
-                    <Button variant="goldOutline" size="sm">
-                      Enquire
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="gold" 
+                        size="sm"
+                        onClick={() => handleBuyNow(product)}
+                        disabled={isLoading}
+                      >
+                        {isLoading ? 'Processing...' : 'Buy Now'}
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

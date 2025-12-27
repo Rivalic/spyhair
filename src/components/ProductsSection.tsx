@@ -1,6 +1,17 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useRazorpay } from "@/hooks/useRazorpay";
+import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 // Static products data
 const products = [
@@ -68,6 +79,14 @@ const formatPrice = (amount: number) => {
 
 const ProductsSection = () => {
   const { initiatePayment, isLoading } = useRazorpay();
+  const { toast } = useToast();
+  const [codDialogOpen, setCodDialogOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+  const [codForm, setCodForm] = useState({
+    name: "",
+    phone: "",
+    address: "",
+  });
 
   const handleBuyNow = (product: typeof products[0]) => {
     initiatePayment({
@@ -80,7 +99,33 @@ const ProductsSection = () => {
     });
   };
 
+  const handleCodOrder = (product: typeof products[0]) => {
+    setSelectedProduct(product);
+    setCodDialogOpen(true);
+  };
+
+  const submitCodOrder = () => {
+    if (!codForm.name || !codForm.phone || !codForm.address) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "COD Order Placed!",
+      description: `Your order for ${selectedProduct?.title} will be delivered soon. Pay ₹${selectedProduct?.price.toLocaleString('en-IN')} on delivery.`,
+    });
+    
+    setCodDialogOpen(false);
+    setCodForm({ name: "", phone: "", address: "" });
+    setSelectedProduct(null);
+  };
+
   return (
+    <>
     <section id="products" className="py-24 bg-gradient-dark">
       <div className="container mx-auto px-4">
         {/* Section Header */}
@@ -136,7 +181,7 @@ const ProductsSection = () => {
                   </p>
 
                   {/* Price and CTA */}
-                  <div className="flex items-center justify-between pt-4 border-t border-border/50">
+                  <div className="flex flex-col gap-3 pt-4 border-t border-border/50">
                     <span className="font-display text-2xl font-bold text-gradient-gold">
                       {formatPrice(product.price)}
                     </span>
@@ -144,10 +189,19 @@ const ProductsSection = () => {
                       <Button 
                         variant="gold" 
                         size="sm"
+                        className="flex-1"
                         onClick={() => handleBuyNow(product)}
                         disabled={isLoading}
                       >
-                        {isLoading ? 'Processing...' : 'Buy Now'}
+                        Pay Online
+                      </Button>
+                      <Button 
+                        variant="goldOutline" 
+                        size="sm"
+                        className="flex-1"
+                        onClick={() => handleCodOrder(product)}
+                      >
+                        COD
                       </Button>
                     </div>
                   </div>
@@ -173,6 +227,56 @@ const ProductsSection = () => {
         </motion.div>
       </div>
     </section>
+
+    {/* COD Order Dialog */}
+    <Dialog open={codDialogOpen} onOpenChange={setCodDialogOpen}>
+      <DialogContent className="bg-card border-border">
+        <DialogHeader>
+          <DialogTitle className="font-display text-xl">Cash on Delivery Order</DialogTitle>
+          <DialogDescription>
+            {selectedProduct && (
+              <span>
+                Order <strong>{selectedProduct.title}</strong> for{" "}
+                <strong className="text-primary">{formatPrice(selectedProduct.price)}</strong>
+              </span>
+            )}
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4 mt-4">
+          <div>
+            <Label htmlFor="cod-name">Full Name</Label>
+            <Input
+              id="cod-name"
+              placeholder="Enter your name"
+              value={codForm.name}
+              onChange={(e) => setCodForm({ ...codForm, name: e.target.value })}
+            />
+          </div>
+          <div>
+            <Label htmlFor="cod-phone">Phone Number</Label>
+            <Input
+              id="cod-phone"
+              placeholder="Enter your phone number"
+              value={codForm.phone}
+              onChange={(e) => setCodForm({ ...codForm, phone: e.target.value })}
+            />
+          </div>
+          <div>
+            <Label htmlFor="cod-address">Delivery Address</Label>
+            <Input
+              id="cod-address"
+              placeholder="Enter your full address"
+              value={codForm.address}
+              onChange={(e) => setCodForm({ ...codForm, address: e.target.value })}
+            />
+          </div>
+          <Button variant="gold" className="w-full" onClick={submitCodOrder}>
+            Place COD Order
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 };
 

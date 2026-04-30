@@ -94,9 +94,13 @@ const HeroSection = () => {
               { value: "15+", label: "Years Experience" },
               { value: "100%", label: "Natural Hair" },
             ].map((stat, index) => {
-              const bgs = ["bg-primary", "bg-secondary", "bg-accent"];
+              const palette = [
+                "bg-gold text-gold-foreground",
+                "bg-burgundy text-burgundy-foreground",
+                "bg-emerald text-emerald-foreground",
+              ];
               return (
-                <div key={index} className={`text-center p-3 border-[3px] border-border shadow-brutal-sm ${bgs[index]} text-foreground`}>
+                <div key={index} className={`text-center p-3 border-[3px] border-border shadow-brutal-sm ${palette[index]}`}>
                   <div className="font-display text-2xl md:text-3xl">
                     {stat.value}
                   </div>

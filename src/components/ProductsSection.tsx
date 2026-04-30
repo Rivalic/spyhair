@@ -43,7 +43,7 @@ const ProductsSection = () => {
   }, []);
 
   return (
-    <section id="products" className="py-24 bg-secondary border-y-[5px] border-border relative">
+    <section id="products" className="py-24 bg-background border-y-[5px] border-border relative">
       <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
       <div className="container mx-auto px-4 relative">
         {/* Section Header */}
@@ -76,7 +76,12 @@ const ProductsSection = () => {
         {!loading && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.map((product, index) => {
-              const cardBgs = ["bg-card", "bg-accent", "bg-primary", "bg-background"];
+              const cardBgs = [
+                "bg-card text-card-foreground",
+                "bg-burgundy text-burgundy-foreground",
+                "bg-emerald text-emerald-foreground",
+                "bg-terracotta text-terracotta-foreground",
+              ];
               const cardBg = cardBgs[index % cardBgs.length];
               return (
                 <motion.div

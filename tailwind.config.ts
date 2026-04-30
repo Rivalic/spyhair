@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Josefin Sans"', 'sans-serif'],
-        sans: ['Inter', 'sans-serif'],
+        display: ['"Archivo Black"', 'sans-serif'],
+        sans: ['"Space Grotesk"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",

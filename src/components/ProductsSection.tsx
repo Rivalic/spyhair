@@ -43,7 +43,7 @@ const ProductsSection = () => {
   }, []);
 
   return (
-    <section id="products" className="py-24 bg-secondary border-y-[5px] border-border relative">
+    <section id="products" className="py-24 bg-background border-y-[5px] border-border relative">
       <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
       <div className="container mx-auto px-4 relative">
         {/* Section Header */}
@@ -76,7 +76,12 @@ const ProductsSection = () => {
         {!loading && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.map((product, index) => {
-              const cardBgs = ["bg-card", "bg-accent", "bg-primary", "bg-background"];
+              const cardBgs = [
+                "bg-card text-card-foreground",
+                "bg-burgundy text-burgundy-foreground",
+                "bg-emerald text-emerald-foreground",
+                "bg-terracotta text-terracotta-foreground",
+              ];
               const cardBg = cardBgs[index % cardBgs.length];
               return (
                 <motion.div
@@ -87,7 +92,7 @@ const ProductsSection = () => {
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                 >
                   <Link to={`/product/${product.id}`}>
-                    <div className={`group relative ${cardBg} text-foreground border-[4px] border-border shadow-brutal hover:shadow-brutal-lg hover:-translate-x-1 hover:-translate-y-1 transition-all duration-150 cursor-pointer`}>
+                    <div className={`group relative ${cardBg} border-[4px] border-border shadow-brutal hover:shadow-brutal-lg hover:-translate-x-1 hover:-translate-y-1 transition-all duration-150 cursor-pointer`}>
                       {/* Product Image */}
                       <div className="relative aspect-square overflow-hidden bg-background border-b-[4px] border-border">
                         <img
@@ -98,26 +103,26 @@ const ProductsSection = () => {
                           width={400}
                           height={400}
                         />
-                        <div className="absolute top-3 left-3 bg-foreground text-background font-display text-xs px-2 py-1">
+                        <div className="absolute top-3 left-3 bg-gold text-gold-foreground font-display text-xs px-2 py-1 border-[2px] border-border">
                           #{String(index + 1).padStart(2, '0')}
                         </div>
                       </div>
 
                       {/* Product Info */}
                       <div className="p-5">
-                        <h3 className="font-display text-xl mb-2 line-clamp-1 text-foreground">
+                        <h3 className="font-display text-xl mb-2 line-clamp-1">
                           {product.name}
                         </h3>
-                        <p className="text-foreground/80 text-sm leading-relaxed mb-4 line-clamp-2 font-medium">
+                        <p className="opacity-80 text-sm leading-relaxed mb-4 line-clamp-2 font-medium">
                           {product.description || "Premium quality hair system"}
                         </p>
 
                         {/* Price */}
                         <div className="pt-4 border-t-[3px] border-border flex items-center justify-between">
-                          <span className="font-display text-2xl text-foreground">
+                          <span className="font-display text-2xl">
                             {formatPrice(product.base_price)}
                           </span>
-                          <span className="bg-foreground text-background px-2 py-1 text-xs font-bold uppercase">
+                          <span className="bg-gold text-gold-foreground px-2 py-1 text-xs font-bold uppercase border-[2px] border-border">
                             View →
                           </span>
                         </div>

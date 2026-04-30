@@ -34,10 +34,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 bg-accent border-[3px] border-border px-4 py-2 mb-8 shadow-brutal-sm -rotate-1"
+            className="inline-flex items-center gap-2 bg-champagne text-champagne-foreground border-[3px] border-border px-4 py-2 mb-8 shadow-brutal-sm -rotate-1"
           >
-            <Star className="w-4 h-4 text-foreground fill-foreground" />
-            <span className="text-sm font-bold uppercase text-foreground">
+            <Star className="w-4 h-4 fill-champagne-foreground" />
+            <span className="text-sm font-bold uppercase">
               India's Most Trusted Hair Solutions
             </span>
           </motion.div>
@@ -94,9 +94,13 @@ const HeroSection = () => {
               { value: "15+", label: "Years Experience" },
               { value: "100%", label: "Natural Hair" },
             ].map((stat, index) => {
-              const bgs = ["bg-primary", "bg-secondary", "bg-accent"];
+              const palette = [
+                "bg-gold text-gold-foreground",
+                "bg-burgundy text-burgundy-foreground",
+                "bg-emerald text-emerald-foreground",
+              ];
               return (
-                <div key={index} className={`text-center p-3 border-[3px] border-border shadow-brutal-sm ${bgs[index]} text-foreground`}>
+                <div key={index} className={`text-center p-3 border-[3px] border-border shadow-brutal-sm ${palette[index]}`}>
                   <div className="font-display text-2xl md:text-3xl">
                     {stat.value}
                   </div>

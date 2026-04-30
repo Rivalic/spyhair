@@ -8,7 +8,7 @@
 
 @layer base {
   :root {
-    --background: 48 100% 88%;
+    --background: 0 0% 100%;
     --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
@@ -17,19 +17,19 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
 
-    --primary: 350 95% 60%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 100% 60%;
+    --secondary: 0 0% 100%;
     --secondary-foreground: 0 0% 0%;
 
-    --muted: 0 0% 95%;
+    --muted: 0 0% 96%;
     --muted-foreground: 0 0% 25%;
 
-    --accent: 60 100% 55%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 0 0% 0%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 100% 50%;
+    --destructive: 0 0% 0%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 0%;
@@ -38,12 +38,12 @@
 
     --radius: 0rem;
 
-    /* Brutalist tokens */
-    --brutal-yellow: 55 100% 60%;
-    --brutal-pink: 330 100% 70%;
-    --brutal-cyan: 190 100% 55%;
-    --brutal-lime: 80 90% 55%;
-    --brutal-orange: 25 100% 60%;
+    /* Brutalist tokens — mono */
+    --brutal-yellow: 0 0% 100%;
+    --brutal-pink: 0 0% 100%;
+    --brutal-cyan: 0 0% 100%;
+    --brutal-lime: 0 0% 100%;
+    --brutal-orange: 0 0% 100%;
 
     /* Hard shadows */
     --shadow-brutal: 6px 6px 0 0 hsl(0 0% 0%);
@@ -52,10 +52,10 @@
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 350 95% 60%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 60 100% 55%;
-    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 0%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 0 0% 0%;
     --sidebar-ring: 0 0% 0%;
   }

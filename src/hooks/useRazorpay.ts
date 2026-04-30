@@ -114,7 +114,7 @@ export const useRazorpay = () => {
         amount: Math.round(amount * 100),
         currency,
         name: 'Premium Hair Systems',
-        description: productDescription || productName,
+        description: (productDescription || productName).slice(0, 255),
         order_id: orderId,
         prefill: {
           name: customerName,

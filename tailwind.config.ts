@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', 'serif'],
-        sans: ['Inter', 'sans-serif'],
-        serif: ['"Playfair Display"', 'serif'],
+        display: ['"Archivo Black"', 'sans-serif'],
+        sans: ['"Space Grotesk"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -54,24 +54,12 @@ export default {
         },
         gold: {
           DEFAULT: "hsl(var(--gold))",
-          foreground: "hsl(var(--gold-foreground))",
+          light: "hsl(var(--gold-light))",
+          dark: "hsl(var(--gold-dark))",
         },
-        champagne: {
-          DEFAULT: "hsl(var(--champagne))",
-          foreground: "hsl(var(--champagne-foreground))",
-        },
-        burgundy: {
-          DEFAULT: "hsl(var(--burgundy))",
-          foreground: "hsl(var(--burgundy-foreground))",
-        },
-        emerald: {
-          DEFAULT: "hsl(var(--emerald))",
-          foreground: "hsl(var(--emerald-foreground))",
-        },
-        terracotta: {
-          DEFAULT: "hsl(var(--terracotta))",
-          foreground: "hsl(var(--terracotta-foreground))",
-        },
+        champagne: "hsl(var(--champagne))",
+        ivory: "hsl(var(--ivory))",
+        charcoal: "hsl(var(--charcoal))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

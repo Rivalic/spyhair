@@ -1,0 +1,11 @@
+UPDATE public.products SET image_url = '/products/la-premium.png'         WHERE id = 'ad06957d-dbd6-4503-a576-d8c8c1cf8b07';
+UPDATE public.products SET image_url = '/products/aus-premium.png'        WHERE id = '3c8c16e2-a34b-4be0-a249-df5420f04c73';
+UPDATE public.products SET image_url = '/products/bmw-premium.png'        WHERE id = 'e03ab743-0819-4a93-9dd3-261dd5798e42';
+UPDATE public.products SET image_url = '/products/golden-mirage.png'      WHERE id = 'eb8855d1-f2ac-4b9d-9a59-be2746efcae8';
+UPDATE public.products SET image_url = '/products/front-lace-mirage.png'  WHERE id = 'f670c785-1e1a-4780-8429-19a6e44ad160';
+UPDATE public.products SET image_url = '/products/poly-premium.png'       WHERE id = '22e199c2-cd32-4ef2-9234-418be2bfc380';
+UPDATE public.products SET image_url = '/products/silk-mirage.png'        WHERE id = 'db241555-04f3-4f18-b91a-15939cc294c7';
+UPDATE public.products SET image_url = '/products/blackbase-premium.png'  WHERE id = '849f6f54-93ec-4fdd-9f9e-79844191191d';
+UPDATE public.products SET image_url = '/products/monofilament-premium.png' WHERE id = 'ad914e60-d34e-453f-9ffa-0897c94e91f7';
+UPDATE public.products SET image_url = '/products/aus-mirage.png'         WHERE id = 'a97afe8c-2ba5-4dbf-88c4-52d67e40b595';
+UPDATE public.products SET image_url = '/products/mono-front-lace.png'    WHERE id = 'ae9f38d1-3c07-4682-a0e1-f780b5229891';

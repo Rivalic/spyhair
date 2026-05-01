@@ -76,8 +76,7 @@ const ProductsSection = () => {
         {!loading && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.map((product, index) => {
-              const cardBgs = ["bg-card", "bg-accent", "bg-primary", "bg-background"];
-              const cardBg = cardBgs[index % cardBgs.length];
+              const cardBg = "bg-card";
               return (
                 <motion.div
                   key={product.id}

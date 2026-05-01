@@ -10,12 +10,12 @@ const Blog = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "3S Golden Hair Blog",
+    "name": "HairLayer Blog",
     "description": "Expert tips, guides, and stories about hair systems and hair replacement solutions.",
     "url": "https://3sgoldenhair.com/blog",
     "publisher": {
       "@type": "Organization",
-      "name": "3S Golden Hair",
+      "name": "HairLayer",
       "logo": {
         "@type": "ImageObject",
         "url": "https://3sgoldenhair.com/logo.png"
@@ -38,7 +38,7 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Blog | 3S Golden Hair - Hair System Tips & Guides</title>
+        <title>Blog | HairLayer - Hair System Tips & Guides</title>
         <meta
           name="description"
           content="Expert tips, guides, and stories about hair systems. Learn maintenance, styling, and get inspired by real transformation stories."
@@ -46,7 +46,7 @@ const Blog = () => {
         <link rel="canonical" href="https://3sgoldenhair.com/blog" />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Blog | 3S Golden Hair" />
+        <meta property="og:title" content="Blog | HairLayer" />
         <meta property="og:description" content="Expert tips, guides, and stories about hair systems." />
         <meta property="og:url" content="https://3sgoldenhair.com/blog" />
         <meta property="og:type" content="website" />

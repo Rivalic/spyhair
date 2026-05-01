@@ -92,7 +92,7 @@ const ProductsSection = () => {
                       <div className="relative aspect-square overflow-hidden bg-background border-b-[4px] border-border">
                         <img
                           src={product.image_url || "/placeholder.svg"}
-                          alt={`${product.name} - Premium hair system by 3S Golden Hair`}
+                          alt={`${product.name} - Premium hair system by HairLayer`}
                           className="w-full h-full object-cover"
                           loading="lazy"
                           width={400}

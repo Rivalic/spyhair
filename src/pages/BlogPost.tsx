@@ -48,7 +48,7 @@ const BlogPost = () => {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "3S Golden Hair",
+      "name": "HairLayer",
       "logo": {
         "@type": "ImageObject",
         "url": "https://3sgoldenhair.com/logo.png"
@@ -90,7 +90,7 @@ const BlogPost = () => {
   return (
     <>
       <Helmet>
-        <title>{post.title} | 3S Golden Hair Blog</title>
+        <title>{post.title} | HairLayer Blog</title>
         <meta name="description" content={post.excerpt} />
         <meta name="author" content={post.author} />
         <link rel="canonical" href={`https://3sgoldenhair.com/blog/${post.slug}`} />

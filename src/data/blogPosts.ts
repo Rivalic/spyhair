@@ -42,10 +42,10 @@ export const blogPosts: BlogPost[] = [
       <p>Your daily activities matter. If you're active or swim regularly, you'll need a more secure attachment method and water-resistant adhesive.</p>
       
       <h2>Getting Started</h2>
-      <p>Book a free consultation with our experts at 3S Golden Hair. We'll assess your needs, show you options, and help you find the perfect system for your lifestyle.</p>
+      <p>Book a free consultation with our experts at HairLayer. We'll assess your needs, show you options, and help you find the perfect system for your lifestyle.</p>
     `,
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=630&fit=crop",
-    author: "3S Golden Hair Team",
+    author: "HairLayer Team",
     date: "December 20, 2025",
     dateISO: "2025-12-20",
     category: "Guide",
@@ -83,7 +83,7 @@ export const blogPosts: BlogPost[] = [
       <p>When not wearing your system, store it on a mannequin head in a cool, dry place away from direct sunlight.</p>
     `,
     image: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200&h=630&fit=crop",
-    author: "3S Golden Hair Team",
+    author: "HairLayer Team",
     date: "December 15, 2025",
     dateISO: "2025-12-15",
     category: "Tips",
@@ -129,7 +129,7 @@ export const blogPosts: BlogPost[] = [
       <p>Many systems combine materials - like lace front with poly perimeter. This gives you the best of both worlds.</p>
     `,
     image: "https://images.unsplash.com/photo-1559825481-12a05cc00344?w=1200&h=630&fit=crop",
-    author: "3S Golden Hair Team",
+    author: "HairLayer Team",
     date: "December 10, 2025",
     dateISO: "2025-12-10",
     category: "Education",
@@ -173,7 +173,7 @@ export const blogPosts: BlogPost[] = [
       </ul>
     `,
     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1200&h=630&fit=crop",
-    author: "3S Golden Hair Team",
+    author: "HairLayer Team",
     date: "December 5, 2025",
     dateISO: "2025-12-05",
     category: "Styling",
@@ -185,14 +185,14 @@ export const blogPosts: BlogPost[] = [
     title: "Real Stories: Life-Changing Transformations",
     excerpt: "Read inspiring stories from our clients who have regained their confidence and transformed their lives with our hair systems.",
     content: `
-      <p>Nothing speaks louder than real results. Here are some inspiring stories from members of the 3S Golden Hair family.</p>
+      <p>Nothing speaks louder than real results. Here are some inspiring stories from members of the HairLayer family.</p>
       
       <h2>Rajesh's Story: Back to Confidence</h2>
-      <p>"I started losing my hair at 25. It affected everything - my work, my dating life, my self-esteem. When I found 3S Golden Hair, everything changed. The system looks so natural that even my closest friends had no idea. I feel like myself again."</p>
+      <p>"I started losing my hair at 25. It affected everything - my work, my dating life, my self-esteem. When I found HairLayer, everything changed. The system looks so natural that even my closest friends had no idea. I feel like myself again."</p>
       <p><em>- Rajesh, 32, Mumbai</em></p>
       
       <h2>Amit's Journey: From Skeptic to Advocate</h2>
-      <p>"I was skeptical at first. I'd seen bad hairpieces and didn't want to look fake. But the quality at 3S Golden Hair is incredible. The custom fitting process ensured a perfect match. Now I recommend them to everyone."</p>
+      <p>"I was skeptical at first. I'd seen bad hairpieces and didn't want to look fake. But the quality at HairLayer is incredible. The custom fitting process ensured a perfect match. Now I recommend them to everyone."</p>
       <p><em>- Amit, 45, Delhi</em></p>
       
       <h2>Suresh's Transformation: A New Chapter</h2>
@@ -200,14 +200,14 @@ export const blogPosts: BlogPost[] = [
       <p><em>- Suresh, 38, Bangalore</em></p>
       
       <h2>Vikram's Experience: Professional Success</h2>
-      <p>"In my field, appearance matters. My receding hairline was affecting client meetings. Since getting my system from 3S Golden Hair, I've landed three major deals. Confidence really does make a difference."</p>
+      <p>"In my field, appearance matters. My receding hairline was affecting client meetings. Since getting my system from HairLayer, I've landed three major deals. Confidence really does make a difference."</p>
       <p><em>- Vikram, 41, Pune</em></p>
       
       <h2>Your Story Starts Here</h2>
       <p>Ready to write your transformation story? Book a free consultation with us today and take the first step toward regaining your confidence.</p>
     `,
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=1200&h=630&fit=crop",
-    author: "3S Golden Hair Team",
+    author: "HairLayer Team",
     date: "November 28, 2025",
     dateISO: "2025-11-28",
     category: "Stories",
@@ -243,7 +243,7 @@ export const blogPosts: BlogPost[] = [
       <p>Have more questions? Our team is here to provide honest, expert advice. Book a consultation to learn more.</p>
     `,
     image: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1200&h=630&fit=crop",
-    author: "3S Golden Hair Team",
+    author: "HairLayer Team",
     date: "November 20, 2025",
     dateISO: "2025-11-20",
     category: "Education",

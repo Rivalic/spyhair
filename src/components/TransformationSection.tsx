@@ -70,7 +70,7 @@ const TransformationSection = () => {
                 TRANSFORMATION
               </h3>
               <p className="text-2xl md:text-3xl font-script text-primary italic">
-                by 3S Golden Hair
+                by HairLayer
               </p>
             </div>
           </motion.div>

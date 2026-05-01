@@ -41,7 +41,7 @@ const Chat = () => {
   return (
     <>
       <Helmet>
-        <title>Chat with AI Assistant | 3S Golden Hair</title>
+        <title>Chat with AI Assistant | HairLayer</title>
         <meta
           name="description"
           content="Get instant answers about our premium hair systems, pricing, and services from our AI assistant."
@@ -102,7 +102,7 @@ const Chat = () => {
                   How can I help you today?
                 </h2>
                 <p className="text-muted-foreground text-center max-w-md mb-8">
-                  I'm your AI assistant for 3S Golden Hair. Ask me anything about our premium hair systems, 
+                  I'm your AI assistant for HairLayer. Ask me anything about our premium hair systems, 
                   pricing, consultations, or care instructions.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg">

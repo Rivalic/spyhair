@@ -2,77 +2,74 @@ import { motion } from "framer-motion";
 
 const TransformationSection = () => {
   return (
-    <section className="py-20 bg-card relative overflow-hidden">
-      {/* Gold accent line at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary" />
-      
-      <div className="container mx-auto px-4">
+    <section className="py-24 bg-background border-y-[5px] border-border relative overflow-hidden">
+      <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Images Section */}
+          {/* Images */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="relative flex justify-center items-end gap-4"
           >
-            {/* Before Image */}
-            <div className="relative">
-              <div className="absolute -top-2 -left-2 -right-2 -bottom-2 border border-primary/50" />
-              <div className="w-56 h-72 md:w-64 md:h-80 bg-muted overflow-hidden relative">
+            {/* Before */}
+            <div className="relative -rotate-2">
+              <div className="w-56 h-72 md:w-64 md:h-80 bg-card border-[4px] border-border shadow-brutal overflow-hidden relative">
                 <img
-                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&crop=face"
+                  src="/transform/before.png"
                   alt="Before transformation"
-                  className="w-full h-full object-cover grayscale"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  width={768}
+                  height={768}
                 />
-                <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-display text-4xl md:text-5xl text-primary/70 tracking-wider">
+                <span className="absolute bottom-3 left-1/2 -translate-x-1/2 font-display text-2xl md:text-3xl bg-foreground text-background px-3 py-1 border-[3px] border-border shadow-brutal-sm">
                   BEFORE
                 </span>
               </div>
             </div>
 
-            {/* After Image */}
-            <div className="relative -ml-8 mt-12">
-              <div className="absolute -top-2 -left-2 -right-2 -bottom-2 border border-primary" />
-              <div className="w-56 h-72 md:w-64 md:h-80 bg-muted overflow-hidden relative">
+            {/* After */}
+            <div className="relative -ml-6 mt-12 rotate-2">
+              <div className="w-56 h-72 md:w-64 md:h-80 bg-card border-[4px] border-border shadow-brutal-lg overflow-hidden relative">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face"
+                  src="/transform/after.png"
                   alt="After transformation"
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  width={768}
+                  height={768}
                 />
-                <span className="absolute top-4 left-1/2 -translate-x-1/2 font-display text-4xl md:text-5xl text-primary tracking-wider">
+                <span className="absolute top-3 left-1/2 -translate-x-1/2 font-display text-2xl md:text-3xl bg-primary text-primary-foreground px-3 py-1 border-[3px] border-border shadow-brutal-sm">
                   AFTER
                 </span>
               </div>
             </div>
           </motion.div>
 
-          {/* Text Section */}
+          {/* Text */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             viewport={{ once: true }}
             className="text-center lg:text-left"
           >
-            <p className="text-lg md:text-xl text-muted-foreground mb-2">
-              Those who have
-            </p>
-            <p className="text-lg md:text-xl text-muted-foreground mb-2">
-              made their life
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">
-              CONFIDENT
-            </h2>
-            
-            <div className="space-y-1">
-              <h3 className="text-4xl md:text-5xl font-display text-foreground tracking-wide">
+            <span className="inline-block bg-accent text-accent-foreground border-[3px] border-border px-4 py-1 font-bold uppercase tracking-widest text-sm shadow-brutal-sm -rotate-1 mb-6">
+              Real Results
+            </span>
+            <h2 className="font-display text-4xl md:text-6xl leading-[0.95] text-foreground mb-4">
+              CONFIDENT{" "}
+              <span className="inline-block bg-primary text-primary-foreground px-3 border-[4px] border-border shadow-brutal rotate-1">
                 TRANSFORMATION
-              </h3>
-              <p className="text-2xl md:text-3xl font-script text-primary italic">
-                by HairLayer
-              </p>
-            </div>
+              </span>
+            </h2>
+            <p className="text-lg md:text-xl text-foreground bg-card border-[3px] border-border p-4 shadow-brutal-sm font-medium inline-block">
+              by HAIRLAYER
+            </p>
           </motion.div>
         </div>
       </div>

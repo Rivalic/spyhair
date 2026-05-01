@@ -1,71 +1,53 @@
 import { motion } from "framer-motion";
 
 const steps = [
-  {
-    number: "01",
-    title: "Consultation",
-    description: "Book a free, private session with our specialists to discuss your needs.",
-  },
-  {
-    number: "02",
-    title: "Custom Fitting",
-    description: "Precise measurements and perfect color matching for an undetectable result.",
-  },
-  {
-    number: "03",
-    title: "Styling",
-    description: "Professional attachment and styling to achieve your desired look.",
-  },
-  {
-    number: "04",
-    title: "Aftercare",
-    description: "Ongoing support, maintenance tips, and regular touch-up services.",
-  },
+  { number: "01", title: "CONSULTATION", description: "Free private session with our specialists to discuss your needs.", bg: "bg-primary" },
+  { number: "02", title: "CUSTOM FITTING", description: "Precise measurements and perfect color matching for an undetectable result.", bg: "bg-accent" },
+  { number: "03", title: "STYLING", description: "Professional attachment and styling to achieve your desired look.", bg: "bg-secondary" },
+  { number: "04", title: "AFTERCARE", description: "Ongoing support, maintenance tips, and regular touch-up services.", bg: "bg-card" },
 ];
 
 const ProcessSection = () => {
   return (
-    <section className="py-24">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
+    <section className="py-24 bg-background border-y-[5px] border-border relative">
+      <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
         >
-          <span className="text-primary uppercase tracking-widest text-sm font-medium">
+          <span className="inline-block bg-accent text-accent-foreground border-[3px] border-border px-4 py-1 font-bold uppercase tracking-widest text-sm shadow-brutal-sm -rotate-1">
             How It Works
           </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold mt-4">
-            Simple <span className="text-gradient-gold italic">Process</span>
+          <h2 className="font-display text-4xl md:text-6xl mt-6 text-foreground">
+            SIMPLE{" "}
+            <span className="inline-block bg-primary text-primary-foreground px-3 border-[4px] border-border shadow-brutal rotate-1">
+              PROCESS
+            </span>
           </h2>
         </motion.div>
 
-        {/* Steps - Horizontal Layout */}
-        <div className="grid md:grid-cols-4 gap-8 md:gap-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
           {steps.map((step, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center md:text-left"
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className={`${step.bg} border-[4px] border-border shadow-brutal hover:shadow-brutal-lg hover:-translate-x-1 hover:-translate-y-1 transition-all duration-150 p-6`}
             >
-              {/* Number */}
-              <span className="font-display text-6xl font-bold text-primary/20">
+              <div className="font-display text-5xl text-foreground mb-3 leading-none">
                 {step.number}
-              </span>
-
-              {/* Title */}
-              <h3 className="font-display text-xl font-bold mt-2 mb-3">
+              </div>
+              <div className="h-[3px] bg-foreground w-12 mb-4" />
+              <h3 className="font-display text-xl text-foreground uppercase mb-3">
                 {step.title}
               </h3>
-
-              {/* Description */}
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-foreground/80 text-sm leading-relaxed font-medium">
                 {step.description}
               </p>
             </motion.div>

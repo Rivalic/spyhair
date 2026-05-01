@@ -43,10 +43,7 @@ const Navbar = () => {
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2 bg-primary text-primary-foreground px-3 py-1.5 border-[3px] border-border shadow-brutal-sm">
           <span className="font-display text-2xl">
-            3S
-          </span>
-          <span className="font-display text-2xl">
-            GOLDEN HAIR
+            HAIRLAYER
           </span>
         </a>
 

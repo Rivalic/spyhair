@@ -208,8 +208,8 @@ const Product = () => {
   return (
     <>
       <Helmet>
-        <title>{product.name} | 3S Golden Hair - Premium Hair Systems</title>
-        <meta name="description" content={product.description || `Buy ${product.name} - Premium quality hair system from 3S Golden Hair`} />
+        <title>{product.name} | HairLayer - Premium Hair Systems</title>
+        <meta name="description" content={product.description || `Buy ${product.name} - Premium quality hair system from HairLayer`} />
       </Helmet>
 
       <Navbar />

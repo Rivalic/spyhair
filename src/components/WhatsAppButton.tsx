@@ -33,7 +33,7 @@ const WhatsAppButton = () => {
                 />
               </div>
               <div className="flex-1">
-                <h3 className="text-white font-semibold text-lg">3S Golden Hair</h3>
+                <h3 className="text-white font-semibold text-lg">HairLayer</h3>
                 <p className="text-white/80 text-sm">Typically replies within minutes</p>
               </div>
               <button
@@ -49,7 +49,7 @@ const WhatsAppButton = () => {
               <div className="bg-white rounded-lg p-3 shadow-sm max-w-[85%] relative">
                 <div className="absolute -left-2 top-2 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-white border-b-8 border-b-transparent" />
                 <p className="text-sm text-gray-800">
-                  👋 Hello! Welcome to 3S Golden Hair. How can we help you today?
+                  👋 Hello! Welcome to HairLayer. How can we help you today?
                 </p>
                 <p className="text-[10px] text-gray-500 text-right mt-1">Now</p>
               </div>

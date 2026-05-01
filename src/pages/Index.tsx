@@ -18,14 +18,14 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>3S Golden Hair | Premium Hair Solutions for Men in India</title>
+        <title>HairLayer | Premium Hair Solutions for Men in India</title>
         <meta
           name="description"
           content="India's leading provider of premium, undetectable hair systems for men. Custom-fitted, 100% natural hair solutions. Book your free consultation today."
         />
         <meta
           name="keywords"
-          content="hair systems India, men's hair replacement, toupee, hair solutions Mumbai, premium wigs for men, 3S Golden Hair"
+          content="hair systems India, men's hair replacement, toupee, hair solutions Mumbai, premium wigs for men, HairLayer"
         />
         <link rel="canonical" href="https://3sgoldenhair.com" />
       </Helmet>

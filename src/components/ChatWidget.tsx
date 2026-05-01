@@ -69,7 +69,7 @@ export function ChatWidget() {
                   <MessageCircle className="h-5 w-5 text-primary-foreground" />
                 </div>
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-foreground">3S Golden Hair</h3>
+                  <h3 className="font-display text-lg font-semibold text-foreground">HairLayer</h3>
                   <p className="text-xs text-muted-foreground">AI Assistant</p>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export function ChatWidget() {
                     <MessageCircle className="h-8 w-8 text-primary" />
                   </div>
                   <h4 className="font-display text-lg font-semibold text-foreground mb-2">
-                    Welcome to 3S Golden Hair
+                    Welcome to HairLayer
                   </h4>
                   <p className="text-sm text-muted-foreground max-w-[280px]">
                     Ask me anything about our premium hair systems, pricing, consultations, or services!

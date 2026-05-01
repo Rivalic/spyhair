@@ -33,10 +33,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
           <div className="flex items-center gap-1 mb-6">
             <span className="font-display text-2xl font-bold text-gradient-gold">
-              3S
-            </span>
-            <span className="font-display text-2xl font-light text-foreground">
-              Golden Hair
+              HairLayer
             </span>
           </div>
           <p className="text-muted-foreground leading-relaxed mb-6 max-w-sm">

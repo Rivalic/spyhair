@@ -2,44 +2,56 @@ import { motion } from "framer-motion";
 
 const features = [
   {
-    title: "Virgin Human Hair",
-    subtitle: "THE ULTRA REAL LOOK",
-    badge: "IMPECCABLE QUALITY",
-    description: "We process 100% Virgin Human Hair weaved strand-by-strand alike original Remy Hair to produce an Undetectable Appearance that resembles your very own natural hair.",
-    image: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=500&h=400&fit=crop",
-    highlight: "Natural Black with greater than 95% match to Indian Hair with tones between Jet Black and Darkest Brown."
+    title: "VIRGIN HUMAN HAIR",
+    badge: "ULTRA REAL LOOK",
+    description:
+      "100% Virgin Human Hair weaved strand-by-strand to produce an undetectable appearance that resembles your own natural hair.",
+    image: "/quality/quality-1.png",
+    bg: "bg-primary",
+    rotate: "-rotate-1",
   },
   {
-    title: "Durable Materials",
-    subtitle: "THE INCOGNITO YOU",
-    badge: null,
-    description: "Our hair systems have a Durable PU coating (where applicable), high grade Breathable Net base, natural hairline, comfortable feel and are odourless, tangle and shedding free.",
-    image: "https://images.unsplash.com/photo-1559825481-12a05cc00344?w=500&h=400&fit=crop",
-    highlight: null
+    title: "DURABLE MATERIALS",
+    badge: "INCOGNITO YOU",
+    description:
+      "Durable PU coating, breathable net base, natural hairline, comfortable feel. Odourless, tangle and shedding free.",
+    image: "/quality/quality-2.png",
+    bg: "bg-accent",
+    rotate: "rotate-1",
   },
   {
-    title: "Balanced Density",
-    subtitle: "BE YOURSELF AGAIN",
+    title: "BALANCED DENSITY",
     badge: "INVISIBLE LOOK",
-    description: "Density in our hair pieces is wisely balanced from Medium to High basis universal distribution of Real Human Hair vis-à-vis scalpscapes of most common DNA's.",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=400&fit=crop",
-    highlight: "Ample Density to achieve any hairstyle with 5-6 inches trim-able length from the vertex."
-  }
+    description:
+      "Density wisely balanced from medium to high. 5-6 inches trim-able length from the vertex for any hairstyle.",
+    image: "/quality/quality-3.png",
+    bg: "bg-secondary",
+    rotate: "-rotate-1",
+  },
 ];
 
 const QualitySection = () => {
   return (
-    <section className="py-20 bg-muted/20">
-      <div className="container mx-auto px-4">
-        <motion.h2
+    <section className="py-24 bg-background border-y-[5px] border-border relative">
+      <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
+      <div className="container mx-auto px-4 relative">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-3xl font-bold text-foreground mb-12"
+          className="text-center mb-16"
         >
-          QUALITY AND COMFORT
-        </motion.h2>
+          <span className="inline-block bg-primary text-primary-foreground border-[3px] border-border px-4 py-1 font-bold uppercase tracking-widest text-sm shadow-brutal-sm rotate-1">
+            Engineered for you
+          </span>
+          <h2 className="font-display text-4xl md:text-6xl mt-6 text-foreground">
+            QUALITY &{" "}
+            <span className="inline-block bg-accent text-accent-foreground px-3 border-[4px] border-border shadow-brutal -rotate-1">
+              COMFORT
+            </span>
+          </h2>
+        </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
@@ -47,58 +59,36 @@ const QualitySection = () => {
               key={feature.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group"
+              className="bg-card border-[4px] border-border shadow-brutal hover:shadow-brutal-lg hover:-translate-x-1 hover:-translate-y-1 transition-all duration-150"
             >
-              {/* Image Card */}
-              <div className={`relative h-72 md:h-80 overflow-hidden mb-6 ${index === 1 ? 'border-4 border-primary' : ''}`}>
+              {/* Image */}
+              <div className="relative aspect-square overflow-hidden border-b-[4px] border-border bg-background">
                 <img
                   src={feature.image}
                   alt={feature.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  width={768}
+                  height={768}
                 />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                
-                {/* Content overlay */}
-                <div className="absolute inset-0 p-5 flex flex-col justify-between">
-                  {/* Top section */}
-                  <div>
-                    <h3 className="text-white text-lg font-bold mb-1">{feature.subtitle}</h3>
-                    {feature.highlight && (
-                      <p className="text-white/80 text-xs leading-relaxed max-w-[180px]">
-                        {feature.highlight}
-                      </p>
-                    )}
-                  </div>
-                  
-                  {/* Badge */}
-                  {feature.badge && (
-                    <div className="self-start">
-                      <span className="text-white/90 text-xs tracking-wider uppercase">
-                        {feature.badge}
-                      </span>
-                    </div>
-                  )}
-                  
-                  {/* Center accent for middle card */}
-                  {index === 1 && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="border border-white/50 p-6">
-                        <span className="text-white text-xl font-display tracking-wider text-center block">
-                          THE<br />INCOGNITO<br />YOU
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <span
+                  className={`absolute top-3 left-3 ${feature.bg} text-foreground font-bold text-xs uppercase border-[3px] border-border px-2 py-1 shadow-brutal-sm ${feature.rotate}`}
+                >
+                  {feature.badge}
+                </span>
               </div>
 
-              {/* Text Content */}
-              <h4 className="text-xl font-bold text-foreground mb-3">{feature.title}</h4>
-              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+              {/* Content */}
+              <div className="p-5">
+                <h3 className="font-display text-xl mb-3 text-foreground uppercase">
+                  {feature.title}
+                </h3>
+                <p className="text-foreground/80 text-sm leading-relaxed font-medium">
+                  {feature.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

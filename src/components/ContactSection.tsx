@@ -4,56 +4,51 @@ import { Button } from "@/components/ui/button";
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-background">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_hsl(43_74%_49%_/_0.05)_0%,_transparent_70%)]" />
-      </div>
+    <section id="contact" className="py-24 bg-secondary border-y-[5px] border-border relative overflow-hidden">
+      <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="container mx-auto px-4 relative">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left - CTA */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
-            <span className="text-primary uppercase tracking-widest text-sm font-medium">
+            <span className="inline-block bg-accent text-accent-foreground border-[3px] border-border px-4 py-1 font-bold uppercase tracking-widest text-sm shadow-brutal-sm -rotate-1">
               Get Started
             </span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">
-              Ready to Transform{" "}
-              <span className="text-gradient-gold italic">Your Look?</span>
+            <h2 className="font-display text-4xl md:text-6xl mt-6 mb-6 text-foreground leading-[0.95]">
+              READY TO{" "}
+              <span className="inline-block bg-primary text-primary-foreground px-3 border-[4px] border-border shadow-brutal rotate-1">
+                TRANSFORM
+              </span>{" "}
+              YOUR LOOK?
             </h2>
-            <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-              Book a free, private consultation with our hair specialists. We'll help
-              you find the perfect hair system that matches your style, lifestyle,
-              and budget.
+            <p className="text-foreground text-lg mb-8 leading-relaxed font-medium bg-card border-[3px] border-border p-4 shadow-brutal-sm">
+              Book a free private consultation with our hair specialists. We'll help you
+              find the perfect hair system that matches your style, lifestyle, and budget.
             </p>
 
-            {/* Features */}
-            <div className="space-y-4 mb-10">
-              {[
-                "Free private consultation",
-                "No obligation assessment",
-                "Custom matching service",
-                "Financing options available",
-              ].map((feature, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
-                    <ArrowRight className="w-3 h-3 text-primary" />
-                  </div>
-                  <span className="text-foreground">{feature}</span>
-                </motion.div>
-              ))}
+            <div className="space-y-3 mb-10">
+              {["Free private consultation", "No obligation assessment", "Custom matching service", "Financing options available"].map(
+                (feature, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: index * 0.08 }}
+                    className="flex items-center gap-3 bg-card border-[3px] border-border p-3 shadow-brutal-sm"
+                  >
+                    <div className="w-7 h-7 bg-primary border-[2px] border-border flex items-center justify-center flex-shrink-0">
+                      <ArrowRight className="w-4 h-4 text-primary-foreground" />
+                    </div>
+                    <span className="text-foreground font-bold uppercase text-sm">{feature}</span>
+                  </motion.div>
+                )
+              )}
             </div>
 
             <Button variant="gold" size="xl" className="group">
@@ -67,65 +62,69 @@ const ContactSection = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-8 md:p-10"
+            transition={{ duration: 0.6 }}
+            className="bg-card border-[4px] border-border shadow-brutal-lg p-6 md:p-8"
           >
-            <h3 className="font-display text-2xl font-bold mb-8">Contact Information</h3>
+            <h3 className="font-display text-2xl md:text-3xl mb-6 text-foreground uppercase border-b-[3px] border-border pb-4">
+              Contact Info
+            </h3>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Phone */}
               <a
                 href="tel:+917014512123"
-                className="flex items-start gap-4 group hover:bg-secondary/30 p-4 rounded-xl transition-colors"
+                className="flex items-start gap-4 bg-primary border-[3px] border-border p-4 shadow-brutal-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal transition-all duration-150"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <Phone className="w-5 h-5 text-primary" />
+                <div className="w-12 h-12 bg-foreground text-background border-[3px] border-border flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">Call Us</div>
-                  <div className="font-medium text-foreground">+91 70145 12123</div>
-                  <div className="text-sm text-muted-foreground">Mon-Sat, 10am-7pm</div>
+                  <div className="text-xs font-bold uppercase text-foreground mb-1">Call Us</div>
+                  <div className="font-display text-lg text-foreground">+91 70145 12123</div>
+                  <div className="text-xs font-bold uppercase text-foreground/70">Mon-Sat, 10am-7pm</div>
                 </div>
               </a>
 
               {/* Email */}
               <a
                 href="mailto:info@3sgoldenhair.com"
-                className="flex items-start gap-4 group hover:bg-secondary/30 p-4 rounded-xl transition-colors"
+                className="flex items-start gap-4 bg-accent border-[3px] border-border p-4 shadow-brutal-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal transition-all duration-150"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <Mail className="w-5 h-5 text-primary" />
+                <div className="w-12 h-12 bg-foreground text-background border-[3px] border-border flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">Email Us</div>
-                  <div className="font-medium text-foreground">info@3sgoldenhair.com</div>
-                  <div className="text-sm text-muted-foreground">We reply within 24 hours</div>
+                  <div className="text-xs font-bold uppercase text-foreground mb-1">Email Us</div>
+                  <div className="font-display text-base text-foreground break-all">
+                    info@3sgoldenhair.com
+                  </div>
+                  <div className="text-xs font-bold uppercase text-foreground/70">Reply within 24 hours</div>
                 </div>
               </a>
 
               {/* Location */}
-              <div className="flex items-start gap-4 p-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-primary" />
+              <div className="flex items-start gap-4 bg-secondary border-[3px] border-border p-4 shadow-brutal-sm">
+                <div className="w-12 h-12 bg-foreground text-background border-[3px] border-border flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">Visit Our Studio</div>
-                  <div className="font-medium text-foreground">
-                    123, Linking Road, Bandra West
+                  <div className="text-xs font-bold uppercase text-foreground mb-1">Visit Studio</div>
+                  <div className="font-display text-base text-foreground">
+                    123 Linking Road, Bandra West
                   </div>
-                  <div className="text-sm text-muted-foreground">Mumbai, Maharashtra 400050</div>
+                  <div className="text-xs font-bold uppercase text-foreground/70">Mumbai 400050</div>
                 </div>
               </div>
 
               {/* Hours */}
-              <div className="flex items-start gap-4 p-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-primary" />
+              <div className="flex items-start gap-4 bg-card border-[3px] border-border p-4 shadow-brutal-sm">
+                <div className="w-12 h-12 bg-foreground text-background border-[3px] border-border flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-sm text-muted-foreground mb-1">Working Hours</div>
-                  <div className="font-medium text-foreground">Mon - Sat: 10:00 AM - 7:00 PM</div>
-                  <div className="text-sm text-muted-foreground">Sunday: By Appointment</div>
+                  <div className="text-xs font-bold uppercase text-foreground mb-1">Hours</div>
+                  <div className="font-display text-base text-foreground">Mon-Sat 10am-7pm</div>
+                  <div className="text-xs font-bold uppercase text-foreground/70">Sun: By Appointment</div>
                 </div>
               </div>
             </div>
